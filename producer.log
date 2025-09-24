@@ -1,0 +1,20 @@
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-admin/target/lib/logback-classic-1.2.12.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-storage/target/lib/logback-classic-1.2.12.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-protocol/target/lib/logback-classic-1.2.12.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-examples/target/lib/logback-classic-1.2.12.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-client/target/lib/logback-classic-1.2.12.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-nameserver/target/lib/logback-classic-1.2.12.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-common/target/lib/logback-classic-1.2.12.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-broker/target/lib/logback-classic-1.2.12.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [ch.qos.logback.classic.util.ContextSelectorStaticBinder]
+00:37:54.401 [main] INFO com.zephyr.client.producer.DefaultZephyrProducer - DefaultZephyrProducer[example_producer_group] start
+00:37:54.404 [main] INFO com.zephyr.examples.ProducerExample - === Sending sync message ===
+00:37:54.427 [main] INFO com.zephyr.examples.ProducerExample - Sync send result: SendResult{sendStatus=SEND_OK, msgId='f8435cad-1a5b-4495-9486-637175b5c3e7', messageQueue=MessageQueue{topic='TestTopic', brokerName='broker-a', queueId=0}, queueOffset=1758645474427, transactionId='null', offsetMsgId='null', regionId='null', traceOn=true}
+00:37:54.441 [main] INFO com.zephyr.examples.ProducerExample - === Sending async message ===
+00:37:54.444 [main] INFO com.zephyr.examples.ProducerExample - Async send success: SendResult{sendStatus=SEND_OK, msgId='b7e68efe-6471-4479-b75a-c3053ae6e14c', messageQueue=MessageQueue{topic='TestTopic', brokerName='broker-a', queueId=1}, queueOffset=1758645474444, transactionId='null', offsetMsgId='null', regionId='null', traceOn=true}
+00:37:55.445 [main] INFO com.zephyr.examples.ProducerExample - === Sending oneway message ===
+00:37:55.445 [main] INFO com.zephyr.client.producer.DefaultZephyrProducer - Send oneway message to queue: MessageQueue{topic='TestTopic', brokerName='broker-a', queueId=1}
+00:37:55.445 [main] INFO com.zephyr.examples.ProducerExample - Oneway message sent
+00:37:55.445 [main] INFO com.zephyr.client.producer.DefaultZephyrProducer - DefaultZephyrProducer[example_producer_group] shutdown

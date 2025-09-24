@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mvn:*)",
+      "Bash(java:*)",
+      "Bash(echo:*)",
+      "Bash(timeout 5 mvn exec:java -pl zephyr-examples -Dexec.mainClass=\"com.zephyr.examples.ConsumerExample\")",
+      "Bash(chmod:*)",
+      "Bash(find:*)",
+      "Bash(./test-zephyr.sh:*)",
+      "Bash(pkill:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
