@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.zephyr.storage.commitlog.FileRollingServiceTest" time="0.359" tests="7" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.zephyr.storage.commitlog.FileRollingServiceTest" time="0.629" tests="7" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -13,9 +13,8 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="CN"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-17-openjdk-amd64/lib"/>
-    <property name="sun.java.command" value="/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-storage/target/surefire/surefirebooter-20250924005247600_3.jar /home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-storage/target/surefire 2025-09-24T00-52-47_546-jvmRun1 surefire-20250924005247600_1tmp surefire_0-20250924005247600_2tmp"/>
+    <property name="sun.java.command" value="/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-storage/target/surefire/surefirebooter-20250925085512786_3.jar /home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-storage/target/surefire 2025-09-25T08-55-12_693-jvmRun1 surefire-20250925085512786_1tmp surefire_0-20250925085512786_2tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="test" value="FileRollingServiceTest"/>
     <property name="surefire.test.class.path" value="/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-storage/target/test-classes:/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-storage/target/classes:/home/wuqisen/.m2/repository/com/zephyr/zephyr-common/1.0.0-SNAPSHOT/zephyr-common-1.0.0-SNAPSHOT.jar:/home/wuqisen/.m2/repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/home/wuqisen/.m2/repository/ch/qos/logback/logback-classic/1.2.12/logback-classic-1.2.12.jar:/home/wuqisen/.m2/repository/ch/qos/logback/logback-core/1.2.12/logback-core-1.2.12.jar:/home/wuqisen/.m2/repository/com/google/guava/guava/32.1.3-jre/guava-32.1.3-jre.jar:/home/wuqisen/.m2/repository/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar:/home/wuqisen/.m2/repository/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/wuqisen/.m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/home/wuqisen/.m2/repository/org/checkerframework/checker-qual/3.37.0/checker-qual-3.37.0.jar:/home/wuqisen/.m2/repository/com/google/errorprone/error_prone_annotations/2.21.1/error_prone_annotations-2.21.1.jar:/home/wuqisen/.m2/repository/com/google/j2objc/j2objc-annotations/2.8/j2objc-annotations-2.8.jar:/home/wuqisen/.m2/repository/org/apache/commons/commons-lang3/3.13.0/commons-lang3-3.13.0.jar:/home/wuqisen/.m2/repository/com/zephyr/zephyr-protocol/1.0.0-SNAPSHOT/zephyr-protocol-1.0.0-SNAPSHOT.jar:/home/wuqisen/.m2/repository/com/google/protobuf/protobuf-java/3.25.1/protobuf-java-3.25.1.jar:/home/wuqisen/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.16.0/jackson-databind-2.16.0.jar:/home/wuqisen/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.16.0/jackson-core-2.16.0.jar:/home/wuqisen/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.16.0/jackson-annotations-2.16.0.jar:/home/wuqisen/.m2/repository/io/netty/netty-all/4.1.104.Final/netty-all-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-buffer/4.1.104.Final/netty-buffer-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-codec/4.1.104.Final/netty-codec-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-codec-dns/4.1.104.Final/netty-codec-dns-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-codec-haproxy/4.1.104.Final/netty-codec-haproxy-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-codec-http/4.1.104.Final/netty-codec-http-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-codec-http2/4.1.104.Final/netty-codec-http2-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-codec-memcache/4.1.104.Final/netty-codec-memcache-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-codec-mqtt/4.1.104.Final/netty-codec-mqtt-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-codec-redis/4.1.104.Final/netty-codec-redis-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-codec-smtp/4.1.104.Final/netty-codec-smtp-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-codec-socks/4.1.104.Final/netty-codec-socks-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-codec-stomp/4.1.104.Final/netty-codec-stomp-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-codec-xml/4.1.104.Final/netty-codec-xml-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-common/4.1.104.Final/netty-common-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-handler/4.1.104.Final/netty-handler-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-transport-native-unix-common/4.1.104.Final/netty-transport-native-unix-common-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-handler-proxy/4.1.104.Final/netty-handler-proxy-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-handler-ssl-ocsp/4.1.104.Final/netty-handler-ssl-ocsp-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-resolver/4.1.104.Final/netty-resolver-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-resolver-dns/4.1.104.Final/netty-resolver-dns-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-transport/4.1.104.Final/netty-transport-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-transport-rxtx/4.1.104.Final/netty-transport-rxtx-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-transport-sctp/4.1.104.Final/netty-transport-sctp-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-transport-udt/4.1.104.Final/netty-transport-udt-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-transport-classes-epoll/4.1.104.Final/netty-transport-classes-epoll-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-transport-classes-kqueue/4.1.104.Final/netty-transport-classes-kqueue-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-resolver-dns-classes-macos/4.1.104.Final/netty-resolver-dns-classes-macos-4.1.104.Final.jar:/home/wuqisen/.m2/repository/io/netty/netty-transport-native-epoll/4.1.104.Final/netty-transport-native-epoll-4.1.104.Final-linux-x86_64.jar:/home/wuqisen/.m2/repository/io/netty/netty-transport-native-epoll/4.1.104.Final/netty-transport-native-epoll-4.1.104.Final-linux-aarch_64.jar:/home/wuqisen/.m2/repository/io/netty/netty-transport-native-epoll/4.1.104.Final/netty-transport-native-epoll-4.1.104.Final-linux-riscv64.jar:/home/wuqisen/.m2/repository/io/netty/netty-transport-native-kqueue/4.1.104.Final/netty-transport-native-kqueue-4.1.104.Final-osx-x86_64.jar:/home/wuqisen/.m2/repository/io/netty/netty-transport-native-kqueue/4.1.104.Final/netty-transport-native-kqueue-4.1.104.Final-osx-aarch_64.jar:/home/wuqisen/.m2/repository/io/netty/netty-resolver-dns-native-macos/4.1.104.Final/netty-resolver-dns-native-macos-4.1.104.Final-osx-x86_64.jar:/home/wuqisen/.m2/repository/io/netty/netty-resolver-dns-native-macos/4.1.104.Final/netty-resolver-dns-native-macos-4.1.104.Final-osx-aarch_64.jar:/home/wuqisen/.m2/repository/org/lz4/lz4-java/1.8.0/lz4-java-1.8.0.jar:/home/wuqisen/.m2/repository/org/xerial/snappy/snappy-java/1.1.10.4/snappy-java-1.1.10.4.jar:/home/wuqisen/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.1/junit-jupiter-5.10.1.jar:/home/wuqisen/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.1/junit-jupiter-api-5.10.1.jar:/home/wuqisen/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/wuqisen/.m2/repository/org/junit/platform/junit-platform-commons/1.10.1/junit-platform-commons-1.10.1.jar:/home/wuqisen/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/wuqisen/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.1/junit-jupiter-params-5.10.1.jar:/home/wuqisen/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.1/junit-jupiter-engine-5.10.1.jar:/home/wuqisen/.m2/repository/org/junit/platform/junit-platform-engine/1.10.1/junit-platform-engine-1.10.1.jar:/home/wuqisen/.m2/repository/org/assertj/assertj-core/3.24.2/assertj-core-3.24.2.jar:/home/wuqisen/.m2/repository/net/bytebuddy/byte-buddy/1.12.21/byte-buddy-1.12.21.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="/home/wuqisen"/>
@@ -29,7 +28,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-storage/target/surefire/surefirebooter-20250924005247600_3.jar"/>
+    <property name="surefire.real.class.path" value="/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-storage/target/surefire/surefirebooter-20250925085512786_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.16+8-Ubuntu-0ubuntu124.04.1"/>
     <property name="user.name" value="wuqisen"/>
@@ -54,154 +53,154 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="testFileRollingDisabled" classname="com.zephyr.storage.commitlog.FileRollingServiceTest" time="0.071">
-    <system-out><![CDATA[00:52:47.974 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Loaded 0 mapped files from /tmp/junit13681814041461695182
-00:52:47.980 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit13681814041461695182/00000000000000000000, size: 1024
-00:52:47.980 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit13681814041461695182/00000000000000000000
-00:52:47.980 [main] WARN com.zephyr.storage.commitlog.MappedFile - Mapped file is full: /tmp/junit13681814041461695182/00000000000000000000, currentPos: 0, dataLength: 5120, fileSize: 1024
-00:52:47.983 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit13681814041461695182/00000000000000000000, result: true, time: 0ms
+  <testcase name="testFileRollingDisabled" classname="com.zephyr.storage.commitlog.FileRollingServiceTest" time="0.236">
+    <system-out><![CDATA[08:55:14.130 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Loaded 0 mapped files from /tmp/junit13531110189795785701
+08:55:14.156 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit13531110189795785701/00000000000000000000, size: 1024
+08:55:14.157 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit13531110189795785701/00000000000000000000
+08:55:14.157 [main] WARN com.zephyr.storage.commitlog.MappedFile - Mapped file is full: /tmp/junit13531110189795785701/00000000000000000000, currentPos: 0, dataLength: 5120, fileSize: 1024
+08:55:14.168 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit13531110189795785701/00000000000000000000, result: true, time: 0ms
 ]]></system-out>
   </testcase>
-  <testcase name="testFileRollingStats" classname="com.zephyr.storage.commitlog.FileRollingServiceTest" time="0.003">
-    <system-out><![CDATA[00:52:47.989 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service started with auto cleanup enabled
-00:52:47.989 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Loaded 0 mapped files from /tmp/junit12871320491715986994
-00:52:47.989 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit12871320491715986994/00000000000000000000, size: 1024
-00:52:47.989 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit12871320491715986994/00000000000000000000
-00:52:47.989 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Rolling file /tmp/junit12871320491715986994/00000000000000000000 due to FILE_SIZE_EXCEEDED
-00:52:47.990 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit12871320491715986994/00000000000000001024, size: 1024
-00:52:47.990 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit12871320491715986994/00000000000000001024
-00:52:47.990 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit12871320491715986994/00000000000000000000 expired by time, age: 488512 hours
-00:52:47.990 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit12871320491715986994/00000000000000000000 - still in use
-00:52:47.991 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service shut down
-00:52:47.991 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit12871320491715986994/00000000000000000000, result: true, time: 0ms
-00:52:47.991 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit12871320491715986994/00000000000000001024, result: true, time: 0ms
+  <testcase name="testFileRollingStats" classname="com.zephyr.storage.commitlog.FileRollingServiceTest" time="0.012">
+    <system-out><![CDATA[08:55:14.194 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service started with auto cleanup enabled
+08:55:14.194 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Loaded 0 mapped files from /tmp/junit10845238969975469275
+08:55:14.195 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit10845238969975469275/00000000000000000000, size: 1024
+08:55:14.195 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit10845238969975469275/00000000000000000000
+08:55:14.197 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Rolling file /tmp/junit10845238969975469275/00000000000000000000 due to FILE_SIZE_EXCEEDED
+08:55:14.198 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit10845238969975469275/00000000000000001024, size: 1024
+08:55:14.198 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit10845238969975469275/00000000000000001024
+08:55:14.199 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit10845238969975469275/00000000000000000000 expired by time, age: 488544 hours
+08:55:14.199 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit10845238969975469275/00000000000000000000 - still in use
+08:55:14.201 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service shut down
+08:55:14.201 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit10845238969975469275/00000000000000000000, result: true, time: 0ms
+08:55:14.201 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit10845238969975469275/00000000000000001024, result: true, time: 0ms
 ]]></system-out>
   </testcase>
-  <testcase name="testServiceLifecycle" classname="com.zephyr.storage.commitlog.FileRollingServiceTest" time="0.001">
-    <system-out><![CDATA[00:52:47.992 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service started with auto cleanup enabled
-00:52:47.993 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service shut down
+  <testcase name="testServiceLifecycle" classname="com.zephyr.storage.commitlog.FileRollingServiceTest" time="0.004">
+    <system-out><![CDATA[08:55:14.206 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service started with auto cleanup enabled
+08:55:14.207 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service shut down
 ]]></system-out>
   </testcase>
-  <testcase name="testFileRollingBySize" classname="com.zephyr.storage.commitlog.FileRollingServiceTest" time="0.104">
-    <system-out><![CDATA[00:52:47.994 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service started with auto cleanup enabled
-00:52:47.994 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Loaded 0 mapped files from /tmp/junit1971842833700705972
-00:52:47.994 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service started with auto cleanup enabled
-00:52:47.994 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit1971842833700705972/00000000000000000000, size: 1024
-00:52:47.994 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit1971842833700705972/00000000000000000000
-00:52:47.995 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Rolling file /tmp/junit1971842833700705972/00000000000000000000 due to FILE_SIZE_EXCEEDED
-00:52:47.995 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit1971842833700705972/00000000000000001024, size: 1024
-00:52:47.995 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit1971842833700705972/00000000000000001024
-00:52:47.995 [main] WARN com.zephyr.storage.commitlog.MappedFile - Mapped file is full: /tmp/junit1971842833700705972/00000000000000001024, currentPos: 0, dataLength: 2048, fileSize: 1024
-00:52:47.995 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit1971842833700705972/00000000000000000000 expired by time, age: 488512 hours
-00:52:47.995 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit1971842833700705972/00000000000000000000 - still in use
-00:52:48.095 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Rolling file /tmp/junit1971842833700705972/00000000000000001024 due to FILE_SIZE_EXCEEDED
-00:52:48.096 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit1971842833700705972/00000000000000002048, size: 1024
-00:52:48.096 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit1971842833700705972/00000000000000002048
-00:52:48.096 [main] WARN com.zephyr.storage.commitlog.MappedFile - Mapped file is full: /tmp/junit1971842833700705972/00000000000000002048, currentPos: 0, dataLength: 2048, fileSize: 1024
-00:52:48.096 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit1971842833700705972/00000000000000000000 expired by time, age: 488512 hours
-00:52:48.096 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit1971842833700705972/00000000000000001024 expired by time, age: 488512 hours
-00:52:48.096 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit1971842833700705972/00000000000000000000 - still in use
-00:52:48.096 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service shut down
-00:52:48.097 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit1971842833700705972/00000000000000001024 - still in use
-00:52:48.097 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit1971842833700705972/00000000000000000000, result: true, time: 0ms
-00:52:48.097 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit1971842833700705972/00000000000000001024, result: true, time: 0ms
-00:52:48.097 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit1971842833700705972/00000000000000002048, result: true, time: 0ms
-00:52:48.097 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service shut down
+  <testcase name="testFileRollingBySize" classname="com.zephyr.storage.commitlog.FileRollingServiceTest" time="0.109">
+    <system-out><![CDATA[08:55:14.210 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service started with auto cleanup enabled
+08:55:14.211 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Loaded 0 mapped files from /tmp/junit14473401707983228984
+08:55:14.211 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service started with auto cleanup enabled
+08:55:14.212 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit14473401707983228984/00000000000000000000, size: 1024
+08:55:14.212 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit14473401707983228984/00000000000000000000
+08:55:14.212 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Rolling file /tmp/junit14473401707983228984/00000000000000000000 due to FILE_SIZE_EXCEEDED
+08:55:14.213 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit14473401707983228984/00000000000000001024, size: 1024
+08:55:14.213 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit14473401707983228984/00000000000000001024
+08:55:14.213 [main] WARN com.zephyr.storage.commitlog.MappedFile - Mapped file is full: /tmp/junit14473401707983228984/00000000000000001024, currentPos: 0, dataLength: 2048, fileSize: 1024
+08:55:14.213 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit14473401707983228984/00000000000000000000 expired by time, age: 488544 hours
+08:55:14.214 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit14473401707983228984/00000000000000000000 - still in use
+08:55:14.313 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Rolling file /tmp/junit14473401707983228984/00000000000000001024 due to FILE_SIZE_EXCEEDED
+08:55:14.315 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit14473401707983228984/00000000000000002048, size: 1024
+08:55:14.315 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit14473401707983228984/00000000000000002048
+08:55:14.315 [main] WARN com.zephyr.storage.commitlog.MappedFile - Mapped file is full: /tmp/junit14473401707983228984/00000000000000002048, currentPos: 0, dataLength: 2048, fileSize: 1024
+08:55:14.316 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit14473401707983228984/00000000000000000000 expired by time, age: 488544 hours
+08:55:14.316 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit14473401707983228984/00000000000000001024 expired by time, age: 488544 hours
+08:55:14.316 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit14473401707983228984/00000000000000000000 - still in use
+08:55:14.316 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit14473401707983228984/00000000000000001024 - still in use
+08:55:14.316 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service shut down
+08:55:14.317 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit14473401707983228984/00000000000000000000, result: true, time: 0ms
+08:55:14.317 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit14473401707983228984/00000000000000001024, result: true, time: 0ms
+08:55:14.317 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit14473401707983228984/00000000000000002048, result: true, time: 0ms
+08:55:14.317 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service shut down
 ]]></system-out>
   </testcase>
-  <testcase name="testFileRollingByTime" classname="com.zephyr.storage.commitlog.FileRollingServiceTest" time="0.103">
-    <system-out><![CDATA[00:52:48.098 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service started with auto cleanup enabled
-00:52:48.098 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Loaded 0 mapped files from /tmp/junit17855609380182664374
-00:52:48.098 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service started with auto cleanup enabled
-00:52:48.099 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit17855609380182664374/00000000000000000000, size: 1024
-00:52:48.099 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit17855609380182664374/00000000000000000000
-00:52:48.099 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Rolling file /tmp/junit17855609380182664374/00000000000000000000 due to FILE_SIZE_EXCEEDED
-00:52:48.099 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit17855609380182664374/00000000000000001024, size: 1024
-00:52:48.099 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit17855609380182664374/00000000000000001024
-00:52:48.099 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit17855609380182664374/00000000000000000000 expired by time, age: 488512 hours
-00:52:48.099 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit17855609380182664374/00000000000000000000 - still in use
-00:52:48.199 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Rolling file /tmp/junit17855609380182664374/00000000000000001024 due to FILE_SIZE_EXCEEDED
-00:52:48.200 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit17855609380182664374/00000000000000002048, size: 1024
-00:52:48.200 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit17855609380182664374/00000000000000002048
-00:52:48.200 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit17855609380182664374/00000000000000000000 expired by time, age: 488512 hours
-00:52:48.200 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit17855609380182664374/00000000000000000000 - still in use
-00:52:48.200 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service shut down
-00:52:48.200 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit17855609380182664374/00000000000000000000, result: true, time: 0ms
-00:52:48.200 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit17855609380182664374/00000000000000001024, result: true, time: 0ms
-00:52:48.200 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit17855609380182664374/00000000000000002048, result: true, time: 0ms
-00:52:48.201 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service shut down
+  <testcase name="testFileRollingByTime" classname="com.zephyr.storage.commitlog.FileRollingServiceTest" time="0.112">
+    <system-out><![CDATA[08:55:14.322 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service started with auto cleanup enabled
+08:55:14.323 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Loaded 0 mapped files from /tmp/junit1213128650393775429
+08:55:14.324 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service started with auto cleanup enabled
+08:55:14.325 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit1213128650393775429/00000000000000000000, size: 1024
+08:55:14.325 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit1213128650393775429/00000000000000000000
+08:55:14.326 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Rolling file /tmp/junit1213128650393775429/00000000000000000000 due to FILE_SIZE_EXCEEDED
+08:55:14.326 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit1213128650393775429/00000000000000001024, size: 1024
+08:55:14.326 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit1213128650393775429/00000000000000001024
+08:55:14.327 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit1213128650393775429/00000000000000000000 expired by time, age: 488544 hours
+08:55:14.327 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit1213128650393775429/00000000000000000000 - still in use
+08:55:14.427 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Rolling file /tmp/junit1213128650393775429/00000000000000001024 due to FILE_SIZE_EXCEEDED
+08:55:14.429 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit1213128650393775429/00000000000000002048, size: 1024
+08:55:14.429 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit1213128650393775429/00000000000000002048
+08:55:14.430 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit1213128650393775429/00000000000000000000 expired by time, age: 488544 hours
+08:55:14.430 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit1213128650393775429/00000000000000000000 - still in use
+08:55:14.430 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service shut down
+08:55:14.430 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit1213128650393775429/00000000000000000000, result: true, time: 0ms
+08:55:14.430 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit1213128650393775429/00000000000000001024, result: true, time: 0ms
+08:55:14.431 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit1213128650393775429/00000000000000002048, result: true, time: 0ms
+08:55:14.431 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service shut down
 ]]></system-out>
   </testcase>
-  <testcase name="testRollingStrategyParsing" classname="com.zephyr.storage.commitlog.FileRollingServiceTest" time="0.001"/>
-  <testcase name="testFileCleanup" classname="com.zephyr.storage.commitlog.FileRollingServiceTest" time="0.056">
-    <system-out><![CDATA[00:52:48.203 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service started with auto cleanup enabled
-00:52:48.203 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Loaded 0 mapped files from /tmp/junit5052502068855689836
-00:52:48.203 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service started with auto cleanup enabled
-00:52:48.203 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit5052502068855689836/00000000000000000000, size: 1024
-00:52:48.203 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit5052502068855689836/00000000000000000000
-00:52:48.204 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Rolling file /tmp/junit5052502068855689836/00000000000000000000 due to FILE_SIZE_EXCEEDED
-00:52:48.204 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit5052502068855689836/00000000000000001024, size: 1024
-00:52:48.204 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit5052502068855689836/00000000000000001024
-00:52:48.204 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5052502068855689836/00000000000000000000 expired by time, age: 488512 hours
-00:52:48.204 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5052502068855689836/00000000000000000000 - still in use
-00:52:48.214 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Rolling file /tmp/junit5052502068855689836/00000000000000001024 due to FILE_SIZE_EXCEEDED
-00:52:48.214 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit5052502068855689836/00000000000000002048, size: 1024
-00:52:48.214 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit5052502068855689836/00000000000000002048
-00:52:48.214 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5052502068855689836/00000000000000000000 expired by time, age: 488512 hours
-00:52:48.214 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5052502068855689836/00000000000000001024 expired by time, age: 0 hours
-00:52:48.215 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5052502068855689836/00000000000000000000 - still in use
-00:52:48.215 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5052502068855689836/00000000000000001024 - still in use
-00:52:48.225 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Rolling file /tmp/junit5052502068855689836/00000000000000002048 due to FILE_SIZE_EXCEEDED
-00:52:48.225 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit5052502068855689836/00000000000000003072, size: 1024
-00:52:48.225 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit5052502068855689836/00000000000000003072
-00:52:48.225 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5052502068855689836/00000000000000000000 expired by time, age: 488512 hours
-00:52:48.225 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5052502068855689836/00000000000000001024 expired by time, age: 0 hours
-00:52:48.225 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5052502068855689836/00000000000000002048 expired by time, age: 0 hours
-00:52:48.225 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5052502068855689836/00000000000000000000 - still in use
-00:52:48.225 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5052502068855689836/00000000000000001024 - still in use
-00:52:48.225 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5052502068855689836/00000000000000002048 - still in use
-00:52:48.235 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Rolling file /tmp/junit5052502068855689836/00000000000000003072 due to FILE_SIZE_EXCEEDED
-00:52:48.236 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit5052502068855689836/00000000000000004096, size: 1024
-00:52:48.236 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit5052502068855689836/00000000000000004096
-00:52:48.236 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5052502068855689836/00000000000000000000 expired by time, age: 488512 hours
-00:52:48.236 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5052502068855689836/00000000000000001024 expired by time, age: 0 hours
-00:52:48.236 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5052502068855689836/00000000000000002048 expired by time, age: 0 hours
-00:52:48.236 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5052502068855689836/00000000000000003072 expired by time, age: 0 hours
-00:52:48.236 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5052502068855689836/00000000000000000000 - still in use
-00:52:48.236 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5052502068855689836/00000000000000001024 - still in use
-00:52:48.236 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5052502068855689836/00000000000000002048 - still in use
-00:52:48.236 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5052502068855689836/00000000000000003072 - still in use
-00:52:48.246 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Rolling file /tmp/junit5052502068855689836/00000000000000004096 due to FILE_SIZE_EXCEEDED
-00:52:48.247 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit5052502068855689836/00000000000000005120, size: 1024
-00:52:48.247 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit5052502068855689836/00000000000000005120
-00:52:48.247 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5052502068855689836/00000000000000000000 expired by time, age: 488512 hours
-00:52:48.247 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5052502068855689836/00000000000000001024 expired by time, age: 0 hours
-00:52:48.247 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5052502068855689836/00000000000000002048 expired by time, age: 0 hours
-00:52:48.247 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5052502068855689836/00000000000000003072 expired by time, age: 0 hours
-00:52:48.247 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5052502068855689836/00000000000000004096 expired by time, age: 0 hours
-00:52:48.247 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5052502068855689836/00000000000000000000 - still in use
-00:52:48.247 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5052502068855689836/00000000000000001024 - still in use
-00:52:48.247 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5052502068855689836/00000000000000002048 - still in use
-00:52:48.248 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5052502068855689836/00000000000000003072 - still in use
-00:52:48.248 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5052502068855689836/00000000000000004096 - still in use
-00:52:48.257 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5052502068855689836/00000000000000000000 expired by time, age: 488512 hours
-00:52:48.257 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5052502068855689836/00000000000000001024 expired by time, age: 0 hours
-00:52:48.257 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5052502068855689836/00000000000000002048 expired by time, age: 0 hours
-00:52:48.257 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5052502068855689836/00000000000000003072 expired by time, age: 0 hours
-00:52:48.257 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5052502068855689836/00000000000000004096 expired by time, age: 0 hours
-00:52:48.257 [main] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5052502068855689836/00000000000000000000 - still in use
-00:52:48.257 [main] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5052502068855689836/00000000000000001024 - still in use
-00:52:48.257 [main] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5052502068855689836/00000000000000002048 - still in use
-00:52:48.258 [main] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5052502068855689836/00000000000000003072 - still in use
-00:52:48.258 [main] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5052502068855689836/00000000000000004096 - still in use
-00:52:48.258 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service shut down
-00:52:48.258 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit5052502068855689836/00000000000000000000, result: true, time: 0ms
-00:52:48.258 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit5052502068855689836/00000000000000001024, result: true, time: 0ms
-00:52:48.258 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit5052502068855689836/00000000000000002048, result: true, time: 0ms
-00:52:48.258 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit5052502068855689836/00000000000000003072, result: true, time: 0ms
-00:52:48.258 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit5052502068855689836/00000000000000004096, result: true, time: 0ms
-00:52:48.258 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit5052502068855689836/00000000000000005120, result: true, time: 0ms
-00:52:48.258 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service shut down
+  <testcase name="testRollingStrategyParsing" classname="com.zephyr.storage.commitlog.FileRollingServiceTest" time="0.002"/>
+  <testcase name="testFileCleanup" classname="com.zephyr.storage.commitlog.FileRollingServiceTest" time="0.071">
+    <system-out><![CDATA[08:55:14.437 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service started with auto cleanup enabled
+08:55:14.438 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Loaded 0 mapped files from /tmp/junit5160875921084643204
+08:55:14.438 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service started with auto cleanup enabled
+08:55:14.438 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit5160875921084643204/00000000000000000000, size: 1024
+08:55:14.439 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit5160875921084643204/00000000000000000000
+08:55:14.439 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Rolling file /tmp/junit5160875921084643204/00000000000000000000 due to FILE_SIZE_EXCEEDED
+08:55:14.439 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit5160875921084643204/00000000000000001024, size: 1024
+08:55:14.439 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit5160875921084643204/00000000000000001024
+08:55:14.440 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5160875921084643204/00000000000000000000 expired by time, age: 488544 hours
+08:55:14.440 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5160875921084643204/00000000000000000000 - still in use
+08:55:14.450 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Rolling file /tmp/junit5160875921084643204/00000000000000001024 due to FILE_SIZE_EXCEEDED
+08:55:14.451 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit5160875921084643204/00000000000000002048, size: 1024
+08:55:14.451 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit5160875921084643204/00000000000000002048
+08:55:14.452 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5160875921084643204/00000000000000000000 expired by time, age: 488544 hours
+08:55:14.452 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5160875921084643204/00000000000000001024 expired by time, age: 0 hours
+08:55:14.452 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5160875921084643204/00000000000000000000 - still in use
+08:55:14.452 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5160875921084643204/00000000000000001024 - still in use
+08:55:14.462 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Rolling file /tmp/junit5160875921084643204/00000000000000002048 due to FILE_SIZE_EXCEEDED
+08:55:14.463 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit5160875921084643204/00000000000000003072, size: 1024
+08:55:14.463 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit5160875921084643204/00000000000000003072
+08:55:14.464 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5160875921084643204/00000000000000000000 expired by time, age: 488544 hours
+08:55:14.464 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5160875921084643204/00000000000000001024 expired by time, age: 0 hours
+08:55:14.464 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5160875921084643204/00000000000000002048 expired by time, age: 0 hours
+08:55:14.464 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5160875921084643204/00000000000000000000 - still in use
+08:55:14.464 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5160875921084643204/00000000000000001024 - still in use
+08:55:14.464 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5160875921084643204/00000000000000002048 - still in use
+08:55:14.474 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Rolling file /tmp/junit5160875921084643204/00000000000000003072 due to FILE_SIZE_EXCEEDED
+08:55:14.475 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit5160875921084643204/00000000000000004096, size: 1024
+08:55:14.475 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit5160875921084643204/00000000000000004096
+08:55:14.476 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5160875921084643204/00000000000000000000 expired by time, age: 488544 hours
+08:55:14.476 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5160875921084643204/00000000000000001024 expired by time, age: 0 hours
+08:55:14.476 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5160875921084643204/00000000000000002048 expired by time, age: 0 hours
+08:55:14.476 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5160875921084643204/00000000000000003072 expired by time, age: 0 hours
+08:55:14.477 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5160875921084643204/00000000000000000000 - still in use
+08:55:14.477 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5160875921084643204/00000000000000001024 - still in use
+08:55:14.477 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5160875921084643204/00000000000000002048 - still in use
+08:55:14.477 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5160875921084643204/00000000000000003072 - still in use
+08:55:14.486 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Rolling file /tmp/junit5160875921084643204/00000000000000004096 due to FILE_SIZE_EXCEEDED
+08:55:14.487 [main] INFO com.zephyr.storage.commitlog.MappedFile - Mapped file created: /tmp/junit5160875921084643204/00000000000000005120, size: 1024
+08:55:14.487 [main] INFO com.zephyr.storage.commitlog.MappedFileQueue - Created new mapped file: /tmp/junit5160875921084643204/00000000000000005120
+08:55:14.488 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5160875921084643204/00000000000000000000 expired by time, age: 488544 hours
+08:55:14.488 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5160875921084643204/00000000000000001024 expired by time, age: 0 hours
+08:55:14.488 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5160875921084643204/00000000000000002048 expired by time, age: 0 hours
+08:55:14.488 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5160875921084643204/00000000000000003072 expired by time, age: 0 hours
+08:55:14.488 [FileCleanup] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5160875921084643204/00000000000000004096 expired by time, age: 0 hours
+08:55:14.488 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5160875921084643204/00000000000000000000 - still in use
+08:55:14.489 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5160875921084643204/00000000000000001024 - still in use
+08:55:14.489 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5160875921084643204/00000000000000002048 - still in use
+08:55:14.489 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5160875921084643204/00000000000000003072 - still in use
+08:55:14.489 [FileCleanup] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5160875921084643204/00000000000000004096 - still in use
+08:55:14.498 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5160875921084643204/00000000000000000000 expired by time, age: 488544 hours
+08:55:14.498 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5160875921084643204/00000000000000001024 expired by time, age: 0 hours
+08:55:14.498 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5160875921084643204/00000000000000002048 expired by time, age: 0 hours
+08:55:14.498 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5160875921084643204/00000000000000003072 expired by time, age: 0 hours
+08:55:14.499 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File /tmp/junit5160875921084643204/00000000000000004096 expired by time, age: 0 hours
+08:55:14.499 [main] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5160875921084643204/00000000000000000000 - still in use
+08:55:14.499 [main] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5160875921084643204/00000000000000001024 - still in use
+08:55:14.499 [main] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5160875921084643204/00000000000000002048 - still in use
+08:55:14.499 [main] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5160875921084643204/00000000000000003072 - still in use
+08:55:14.499 [main] WARN com.zephyr.storage.commitlog.FileRollingService - Cannot clean file /tmp/junit5160875921084643204/00000000000000004096 - still in use
+08:55:14.501 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service shut down
+08:55:14.502 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit5160875921084643204/00000000000000000000, result: true, time: 0ms
+08:55:14.503 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit5160875921084643204/00000000000000001024, result: true, time: 0ms
+08:55:14.503 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit5160875921084643204/00000000000000002048, result: true, time: 0ms
+08:55:14.503 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit5160875921084643204/00000000000000003072, result: true, time: 0ms
+08:55:14.504 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit5160875921084643204/00000000000000004096, result: true, time: 0ms
+08:55:14.504 [main] INFO com.zephyr.storage.commitlog.MappedFile - Delete mapped file: /tmp/junit5160875921084643204/00000000000000005120, result: true, time: 0ms
+08:55:14.505 [main] INFO com.zephyr.storage.commitlog.FileRollingService - File rolling service shut down
 ]]></system-out>
   </testcase>
 </testsuite>

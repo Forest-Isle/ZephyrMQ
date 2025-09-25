@@ -1,2 +1,6 @@
 com/zephyr/storage/commitlog/FileRollingServiceTest.class
+com/zephyr/storage/flush/AsyncFlushServiceTest.class
 com/zephyr/storage/compression/MessageCompressorTest.class
+com/zephyr/storage/index/SparseIndexTest.class
+com/zephyr/storage/integrity/MessageIntegrityCheckerTest.class
+com/zephyr/storage/checksum/MessageChecksumTest.class

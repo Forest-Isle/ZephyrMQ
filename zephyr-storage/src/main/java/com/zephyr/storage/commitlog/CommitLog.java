@@ -3,6 +3,10 @@ package com.zephyr.storage.commitlog;
 import com.zephyr.common.config.BrokerConfig;
 import com.zephyr.protocol.message.MessageExt;
 import com.zephyr.storage.compression.MessageCompressor;
+import com.zephyr.storage.checksum.MessageChecksum;
+import com.zephyr.storage.integrity.MessageIntegrityChecker;
+import com.zephyr.storage.index.SparseIndex;
+import com.zephyr.storage.flush.AsyncFlushService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,15 +29,24 @@ public class CommitLog {
     private final MappedFileQueue mappedFileQueue;
     private final BrokerConfig brokerConfig;
     private final AtomicLong confirmOffset = new AtomicLong(-1);
+    private final SparseIndex sparseIndex;
+    private final AtomicLong messageSequence = new AtomicLong(0);
+    private final AsyncFlushService asyncFlushService;
 
     public CommitLog(final BrokerConfig brokerConfig) {
         this.brokerConfig = brokerConfig;
         this.mappedFileQueue = new MappedFileQueue(brokerConfig.getStorePathCommitLog(),
                 brokerConfig.getMapedFileSizeCommitLog());
+        this.sparseIndex = new SparseIndex(
+            brokerConfig.getSparseIndexInterval(),
+            brokerConfig.getMaxSparseIndexEntries()
+        );
+        this.asyncFlushService = new AsyncFlushService(brokerConfig);
     }
 
     public void load() {
         this.mappedFileQueue.load();
+        this.asyncFlushService.start();
     }
 
     public void start() {
@@ -41,6 +54,8 @@ public class CommitLog {
     }
 
     public void shutdown() {
+        logger.info("CommitLog service shutdown starting");
+        this.asyncFlushService.shutdown();
         this.mappedFileQueue.shutdown(1000 * 3);
         logger.info("CommitLog service shutdown");
     }
@@ -57,6 +72,22 @@ public class CommitLog {
         if (messageBytes == null) {
             logger.error("Encode message failed, msgId: {}", msg.getMsgId());
             return new PutMessageResult(PutMessageStatus.MESSAGE_ILLEGAL, null);
+        }
+
+        // 执行消息完整性检查（如果启用）
+        if (brokerConfig.isIntegrityCheckEnable()) {
+            MessageIntegrityChecker.IntegrityCheckResult integrityResult =
+                MessageIntegrityChecker.checkMessageIntegrity(
+                    messageBytes,
+                    MessageIntegrityChecker.IntegrityCheckType.FULL,
+                    brokerConfig.getMaxMessageSize()
+                );
+
+            if (!integrityResult.isPassed()) {
+                logger.error("Message integrity check failed for msgId: {}, violations: {}",
+                    msg.getMsgId(), integrityResult.getViolations().size());
+                return new PutMessageResult(PutMessageStatus.MESSAGE_ILLEGAL, null);
+            }
         }
 
         // 写入文件
@@ -80,6 +111,38 @@ public class CommitLog {
                 return new PutMessageResult(PutMessageStatus.UNKNOWN_ERROR, null);
         }
 
+        // 添加稀疏索引项（如果启用）
+        if (brokerConfig.isSparseIndexEnable()) {
+            long logicalOffset = messageSequence.getAndIncrement();
+            sparseIndex.addIndexEntry(
+                logicalOffset,
+                result.getWroteOffset(),
+                msg.getStoreTimestamp(),
+                messageBytes.length,
+                msg.getTopic(),
+                msg.getQueueId()
+            );
+        }
+
+        // 异步刷盘（如果启用）
+        if (brokerConfig.isAsyncFlushEnable()) {
+            // 检查是否需要刷盘
+            if (asyncFlushService.shouldFlush(result.getWroteBytes(), mappedFileQueue.getStoreTimestamp())) {
+                asyncFlushService.flushAsync(mappedFileQueue)
+                    .whenComplete((flushResult, throwable) -> {
+                        if (throwable != null) {
+                            logger.error("Async flush failed for msgId: {}", msg.getMsgId(), throwable);
+                        } else if (!flushResult.isSuccess()) {
+                            logger.warn("Async flush failed for msgId: {}, result: {}",
+                                       msg.getMsgId(), flushResult);
+                        } else {
+                            logger.debug("Async flush completed for msgId: {}, result: {}",
+                                        msg.getMsgId(), flushResult);
+                        }
+                    });
+            }
+        }
+
         PutMessageResult putMessageResult = new PutMessageResult(PutMessageStatus.PUT_OK, result);
 
         // 更新统计信息
@@ -91,9 +154,30 @@ public class CommitLog {
     }
 
     /**
-     * 根据物理偏移量获取消息
+     * 根据物理偏移量获取消息（使用稀疏索引加速）
      */
     public MessageExt lookMessageByOffset(long commitLogOffset) {
+        // 尝试使用稀疏索引快速定位
+        if (brokerConfig.isSparseIndexEnable()) {
+            SparseIndex.IndexEntry indexEntry = sparseIndex.findByPhysicalOffset(commitLogOffset);
+            if (indexEntry != null) {
+                // 从索引位置开始查找，而不是从文件开头
+                long startOffset = indexEntry.getPhysicalOffset();
+                logger.debug("Using sparse index to accelerate lookup: target={}, index={}",
+                           commitLogOffset, startOffset);
+
+                // 如果偏移量正好匹配索引项，可以直接计算位置
+                if (commitLogOffset == startOffset) {
+                    MappedFile mappedFile = this.mappedFileQueue.findMappedFileByOffset(commitLogOffset);
+                    if (mappedFile != null) {
+                        int pos = (int) (commitLogOffset % this.brokerConfig.getMapedFileSizeCommitLog());
+                        return lookMessageByOffset(mappedFile, pos);
+                    }
+                }
+            }
+        }
+
+        // 回退到原始查找方法
         MappedFile mappedFile = this.mappedFileQueue.findMappedFileByOffset(commitLogOffset);
         if (mappedFile != null) {
             int pos = (int) (commitLogOffset % this.brokerConfig.getMapedFileSizeCommitLog());
@@ -101,6 +185,30 @@ public class CommitLog {
         }
 
         return null;
+    }
+
+    /**
+     * 根据时间范围查询消息（使用稀疏索引）
+     */
+    public SparseIndex.QueryRange queryMessagesByTimeRange(long startTime, long endTime) {
+        if (!brokerConfig.isSparseIndexEnable()) {
+            logger.warn("Sparse index is disabled, time range query not supported");
+            return null;
+        }
+
+        return sparseIndex.queryByTimeRange(startTime, endTime);
+    }
+
+    /**
+     * 根据逻辑偏移量范围查询消息（使用稀疏索引）
+     */
+    public SparseIndex.QueryRange queryMessagesByLogicalRange(long startOffset, long endOffset) {
+        if (!brokerConfig.isSparseIndexEnable()) {
+            logger.warn("Sparse index is disabled, logical range query not supported");
+            return null;
+        }
+
+        return sparseIndex.queryByLogicalRange(startOffset, endOffset);
     }
 
     /**
@@ -182,7 +290,11 @@ public class CommitLog {
             // 写入消息头
             buffer.putInt(totalSize);
             buffer.putInt(MESSAGE_MAGIC_CODE);
-            buffer.putInt(0); // bodyCRC
+
+            // 计算消息体CRC32校验和
+            int bodyCRC = MessageChecksum.calculateCRC32(finalBodyBytes);
+            buffer.putInt(bodyCRC);
+
             buffer.putInt(messageExt.getQueueId());
             buffer.putInt(messageExt.getFlag());
             buffer.putLong(messageExt.getQueueOffset());
@@ -290,6 +402,15 @@ public class CommitLog {
                 }
             }
 
+            // 验证消息体CRC32校验和
+            if (brokerConfig.isChecksumVerificationEnable()) {
+                MessageChecksum.ChecksumResult checksumResult = verifyCRC32(finalBodyBytes, bodyCRC);
+                if (!checksumResult.isValid()) {
+                    logger.error("Message CRC32 verification failed: {}", checksumResult);
+                    return null;
+                }
+            }
+
             // 设置消息属性
             messageExt.setTopic(topic);
             messageExt.setTags(tags);
@@ -344,6 +465,19 @@ public class CommitLog {
     }
 
     /**
+     * 验证消息CRC32校验和
+     */
+    private MessageChecksum.ChecksumResult verifyCRC32(byte[] data, int expectedCRC) {
+        int actualCRC = MessageChecksum.calculateCRC32(data);
+        if (actualCRC == expectedCRC) {
+            return MessageChecksum.ChecksumResult.success(actualCRC);
+        } else {
+            return MessageChecksum.ChecksumResult.failure(expectedCRC, actualCRC,
+                "Message body CRC32 mismatch");
+        }
+    }
+
+    /**
      * 获取压缩类型
      */
     private MessageCompressor.CompressionType getCompressionType() {
@@ -353,6 +487,55 @@ public class CommitLog {
         } catch (IllegalArgumentException e) {
             logger.warn("Invalid compression type: {}, fallback to NONE", compressionTypeStr);
             return MessageCompressor.CompressionType.NONE;
+        }
+    }
+
+    /**
+     * 获取稀疏索引
+     */
+    public SparseIndex getSparseIndex() {
+        return sparseIndex;
+    }
+
+    /**
+     * 获取稀疏索引统计信息
+     */
+    public SparseIndex.IndexStatistics getSparseIndexStatistics() {
+        return sparseIndex.getStatistics();
+    }
+
+    /**
+     * 获取异步刷盘服务
+     */
+    public AsyncFlushService getAsyncFlushService() {
+        return asyncFlushService;
+    }
+
+    /**
+     * 获取异步刷盘统计信息
+     */
+    public AsyncFlushService.FlushStatistics getFlushStatistics() {
+        return asyncFlushService.getStatistics();
+    }
+
+    /**
+     * 强制刷盘
+     */
+    public void forceFlush() {
+        if (asyncFlushService.isRunning()) {
+            asyncFlushService.forceFlush(mappedFileQueue)
+                .whenComplete((result, throwable) -> {
+                    if (throwable != null) {
+                        logger.error("Force flush failed", throwable);
+                    } else if (result.isSuccess()) {
+                        logger.info("Force flush completed: {}", result);
+                    } else {
+                        logger.warn("Force flush failed: {}", result.getErrorMessage());
+                    }
+                });
+        } else {
+            logger.warn("AsyncFlushService is not running, performing sync flush");
+            mappedFileQueue.flush(0);
         }
     }
 

@@ -8,7 +8,8 @@
       "Bash(chmod:*)",
       "Bash(find:*)",
       "Bash(./test-zephyr.sh:*)",
-      "Bash(pkill:*)"
+      "Bash(pkill:*)",
+      "Bash(javap:*)"
     ],
     "deny": [],
     "ask": []

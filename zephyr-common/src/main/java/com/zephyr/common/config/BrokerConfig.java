@@ -52,6 +52,27 @@ public class BrokerConfig {
     private int compressionThreshold = 1024; // 1KB, messages smaller than this won't be compressed
     private double compressionRatioThreshold = 0.1; // 10%, minimum compression ratio to apply compression
 
+    // Checksum configuration
+    private boolean checksumVerificationEnable = true; // Enable CRC32 checksum verification
+    private boolean checksumCalculationEnable = true; // Enable CRC32 checksum calculation during encoding
+    private String checksumAlgorithm = "CRC32"; // CRC32, ADLER32
+
+    // Integrity check configuration
+    private boolean integrityCheckEnable = true; // Enable comprehensive integrity check on message storage
+    private boolean integrityCheckOnRead = false; // Enable integrity check when reading messages (performance impact)
+
+    // Sparse index configuration
+    private boolean sparseIndexEnable = true; // Enable sparse index for query performance improvement
+    private int sparseIndexInterval = 100; // Index interval: create one index entry per N messages
+    private int maxSparseIndexEntries = 100000; // Maximum number of index entries to keep in memory
+
+    // Async flush configuration
+    private boolean asyncFlushEnable = true; // Enable async flush mechanism
+    private String flushStrategy = "ASYNC_HYBRID"; // SYNC, ASYNC_BATCH, ASYNC_TIMER, ASYNC_HYBRID
+    private int flushBatchSize = 4; // Flush batch size in pages (4KB each)
+    private long flushIntervalMs = 500; // Flush interval in milliseconds
+    private int flushThreadPoolSize = 2; // Flush thread pool size
+
     // File rolling configuration
     private boolean fileRollingEnable = true;
     private String fileRollingStrategy = "SIZE_TIME"; // SIZE, TIME, SIZE_TIME
@@ -428,5 +449,109 @@ public class BrokerConfig {
 
     public void setCleanExpiredFilesInterval(int cleanExpiredFilesInterval) {
         this.cleanExpiredFilesInterval = cleanExpiredFilesInterval;
+    }
+
+    public boolean isChecksumVerificationEnable() {
+        return checksumVerificationEnable;
+    }
+
+    public void setChecksumVerificationEnable(boolean checksumVerificationEnable) {
+        this.checksumVerificationEnable = checksumVerificationEnable;
+    }
+
+    public boolean isChecksumCalculationEnable() {
+        return checksumCalculationEnable;
+    }
+
+    public void setChecksumCalculationEnable(boolean checksumCalculationEnable) {
+        this.checksumCalculationEnable = checksumCalculationEnable;
+    }
+
+    public String getChecksumAlgorithm() {
+        return checksumAlgorithm;
+    }
+
+    public void setChecksumAlgorithm(String checksumAlgorithm) {
+        this.checksumAlgorithm = checksumAlgorithm;
+    }
+
+    public boolean isIntegrityCheckEnable() {
+        return integrityCheckEnable;
+    }
+
+    public void setIntegrityCheckEnable(boolean integrityCheckEnable) {
+        this.integrityCheckEnable = integrityCheckEnable;
+    }
+
+    public boolean isIntegrityCheckOnRead() {
+        return integrityCheckOnRead;
+    }
+
+    public void setIntegrityCheckOnRead(boolean integrityCheckOnRead) {
+        this.integrityCheckOnRead = integrityCheckOnRead;
+    }
+
+    public boolean isSparseIndexEnable() {
+        return sparseIndexEnable;
+    }
+
+    public void setSparseIndexEnable(boolean sparseIndexEnable) {
+        this.sparseIndexEnable = sparseIndexEnable;
+    }
+
+    public int getSparseIndexInterval() {
+        return sparseIndexInterval;
+    }
+
+    public void setSparseIndexInterval(int sparseIndexInterval) {
+        this.sparseIndexInterval = sparseIndexInterval;
+    }
+
+    public int getMaxSparseIndexEntries() {
+        return maxSparseIndexEntries;
+    }
+
+    public void setMaxSparseIndexEntries(int maxSparseIndexEntries) {
+        this.maxSparseIndexEntries = maxSparseIndexEntries;
+    }
+
+    public boolean isAsyncFlushEnable() {
+        return asyncFlushEnable;
+    }
+
+    public void setAsyncFlushEnable(boolean asyncFlushEnable) {
+        this.asyncFlushEnable = asyncFlushEnable;
+    }
+
+    public String getFlushStrategy() {
+        return flushStrategy;
+    }
+
+    public void setFlushStrategy(String flushStrategy) {
+        this.flushStrategy = flushStrategy;
+    }
+
+    public int getFlushBatchSize() {
+        return flushBatchSize;
+    }
+
+    public void setFlushBatchSize(int flushBatchSize) {
+        this.flushBatchSize = flushBatchSize;
+    }
+
+    public long getFlushIntervalMs() {
+        return flushIntervalMs;
+    }
+
+    public void setFlushIntervalMs(long flushIntervalMs) {
+        this.flushIntervalMs = flushIntervalMs;
+    }
+
+    public int getFlushThreadPoolSize() {
+        return flushThreadPoolSize;
+    }
+
+    public void setFlushThreadPoolSize(int flushThreadPoolSize) {
+        this.flushThreadPoolSize = flushThreadPoolSize;
     }
 }
