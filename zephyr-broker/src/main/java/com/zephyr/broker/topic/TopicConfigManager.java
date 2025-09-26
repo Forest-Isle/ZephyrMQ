@@ -15,22 +15,33 @@ public class TopicConfigManager {
     private final AtomicBoolean started = new AtomicBoolean(false);
     private final BrokerConfig brokerConfig;
     private final ConcurrentMap<String, TopicConfig> topicConfigTable = new ConcurrentHashMap<>();
+    private final TopicMetadataPersistence persistence;
 
     public TopicConfigManager(BrokerConfig brokerConfig) {
         this.brokerConfig = brokerConfig;
+        this.persistence = new TopicMetadataPersistence(brokerConfig);
     }
 
     public void start() {
         if (started.compareAndSet(false, true)) {
             logger.info("TopicConfigManager starting...");
+
+            // Start persistence service
+            persistence.start();
+
+            // Load existing configurations
             loadTopicConfigs();
+
             logger.info("TopicConfigManager started successfully");
         }
     }
 
     public void shutdown() {
         logger.info("TopicConfigManager shutting down...");
-        // Save topic configs if needed
+
+        // Shutdown persistence service (this will trigger final flush)
+        persistence.shutdown();
+
         logger.info("TopicConfigManager shut down successfully");
     }
 
@@ -40,6 +51,10 @@ public class TopicConfigManager {
 
     public void updateTopicConfig(TopicConfig topicConfig) {
         topicConfigTable.put(topicConfig.getTopicName(), topicConfig);
+
+        // Persist to disk
+        persistence.saveTopicConfig(topicConfig.getTopicName(), topicConfig);
+
         logger.info("Updated topic config: {}", topicConfig.getTopicName());
     }
 
@@ -61,14 +76,51 @@ public class TopicConfigManager {
     public void deleteTopicConfig(String topic) {
         TopicConfig removed = topicConfigTable.remove(topic);
         if (removed != null) {
+            // Remove from persistence
+            persistence.deleteTopicConfig(topic);
+
             logger.info("Deleted topic config: {}", topic);
         }
     }
 
+    public ConcurrentMap<String, TopicConfig> getTopicConfigTable() {
+        return topicConfigTable;
+    }
+
+    public boolean topicExists(String topic) {
+        return topicConfigTable.containsKey(topic);
+    }
+
+    public int getTopicCount() {
+        return topicConfigTable.size();
+    }
+
     private void loadTopicConfigs() {
-        // Create default topic config
+        // Load from persistence first
+        var persistedConfigs = persistence.loadTopicConfigs();
+
+        // Convert and load persisted configs
+        persistedConfigs.forEach((topicName, wrapper) -> {
+            TopicConfig config = new TopicConfig();
+            config.setTopicName(wrapper.getTopicName());
+            config.setReadQueueNums(wrapper.getReadQueueNums());
+            config.setWriteQueueNums(wrapper.getWriteQueueNums());
+            config.setPerm(wrapper.getPerm());
+            try {
+                config.setTopicFilterType(TopicFilterType.valueOf(wrapper.getTopicFilterType()));
+            } catch (IllegalArgumentException e) {
+                config.setTopicFilterType(TopicFilterType.SINGLE_TAG);
+            }
+            config.setTopicSysFlag(wrapper.getTopicSysFlag());
+            config.setOrder(wrapper.isOrder());
+
+            topicConfigTable.put(topicName, config);
+        });
+
+        // Create default topics if they don't exist
         createTopicIfNotExists("DefaultTopic", 4, 6);
         createTopicIfNotExists("TestTopic", 4, 6);
+
         logger.info("Loaded {} topic configs", topicConfigTable.size());
     }
 

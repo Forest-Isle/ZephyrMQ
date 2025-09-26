@@ -1,5 +1,8 @@
 package com.zephyr.client.producer;
 
+import com.zephyr.client.route.TopicRouteInfoManager;
+import com.zephyr.client.partition.MessageQueueSelector;
+import com.zephyr.client.partition.SelectMessageQueueByRoundRobin;
 import com.zephyr.protocol.message.Message;
 import com.zephyr.protocol.message.MessageQueue;
 import com.zephyr.protocol.message.SendResult;
@@ -23,11 +26,15 @@ public class DefaultZephyrProducer implements ZephyrProducer {
 
     private final AtomicBoolean started = new AtomicBoolean(false);
     private final ExecutorService asyncSenderExecutor;
+    private final TopicRouteInfoManager routeInfoManager;
 
     private String producerGroup;
     private String nameserverAddresses;
     private int sendMsgTimeout = DEFAULT_SEND_TIMEOUT_MILLIS;
     private int maxMessageSize = MAX_MESSAGE_SIZE;
+
+    // Default message queue selector
+    private MessageQueueSelector defaultMessageQueueSelector = new SelectMessageQueueByRoundRobin();
 
     public DefaultZephyrProducer() {
         this("DEFAULT_PRODUCER");
@@ -36,6 +43,7 @@ public class DefaultZephyrProducer implements ZephyrProducer {
     public DefaultZephyrProducer(String producerGroup) {
         this.producerGroup = producerGroup;
         this.asyncSenderExecutor = Executors.newFixedThreadPool(4);
+        this.routeInfoManager = new TopicRouteInfoManager();
     }
 
     @Override
@@ -142,13 +150,49 @@ public class DefaultZephyrProducer implements ZephyrProducer {
 
     @Override
     public List<MessageQueue> fetchPublishMessageQueues(String topic) throws Exception {
-        // TODO: Fetch from nameserver
-        // For now, return mock queues
-        List<MessageQueue> queues = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            queues.add(new MessageQueue(topic, "broker-a", i));
+        return routeInfoManager.getPublishMessageQueues(topic);
+    }
+
+    /**
+     * Send message with custom queue selector
+     *
+     * @param msg message to send
+     * @param selector message queue selector
+     * @param arg selector argument
+     * @return send result
+     * @throws Exception if send fails
+     */
+    public SendResult send(Message msg, MessageQueueSelector selector, Object arg) throws Exception {
+        return send(msg, selector, arg, sendMsgTimeout);
+    }
+
+    /**
+     * Send message with custom queue selector and timeout
+     *
+     * @param msg message to send
+     * @param selector message queue selector
+     * @param arg selector argument
+     * @param timeout send timeout
+     * @return send result
+     * @throws Exception if send fails
+     */
+    public SendResult send(Message msg, MessageQueueSelector selector, Object arg, long timeout) throws Exception {
+        checkMessage(msg);
+
+        List<MessageQueue> messageQueues = fetchPublishMessageQueues(msg.getTopic());
+        if (messageQueues.isEmpty()) {
+            throw new Exception("No available message queue for topic: " + msg.getTopic());
         }
-        return queues;
+
+        MessageQueue selectedQueue = selector != null ?
+            selector.select(messageQueues, msg, arg) :
+            defaultMessageQueueSelector.select(messageQueues, msg, arg);
+
+        if (selectedQueue == null) {
+            throw new Exception("Failed to select message queue for topic: " + msg.getTopic());
+        }
+
+        return send(msg, selectedQueue, timeout);
     }
 
     private void checkMessage(Message msg) throws Exception {
@@ -179,12 +223,12 @@ public class DefaultZephyrProducer implements ZephyrProducer {
     }
 
     private MessageQueue selectOneMessageQueue(String topic) throws Exception {
-        List<MessageQueue> queues = fetchPublishMessageQueues(topic);
-        if (queues.isEmpty()) {
+        List<MessageQueue> messageQueues = fetchPublishMessageQueues(topic);
+        if (messageQueues.isEmpty()) {
             throw new Exception("No available message queue for topic: " + topic);
         }
-        // Simple round-robin selection
-        return queues.get((int) (System.currentTimeMillis() % queues.size()));
+
+        return defaultMessageQueueSelector.select(messageQueues, null, null);
     }
 
     private SendResult createMockSendResult(Message msg, MessageQueue mq) {
@@ -227,5 +271,17 @@ public class DefaultZephyrProducer implements ZephyrProducer {
 
     public void setMaxMessageSize(int maxMessageSize) {
         this.maxMessageSize = maxMessageSize;
+    }
+
+    public MessageQueueSelector getDefaultMessageQueueSelector() {
+        return defaultMessageQueueSelector;
+    }
+
+    public void setDefaultMessageQueueSelector(MessageQueueSelector defaultMessageQueueSelector) {
+        this.defaultMessageQueueSelector = defaultMessageQueueSelector;
+    }
+
+    public TopicRouteInfoManager getRouteInfoManager() {
+        return routeInfoManager;
     }
 }

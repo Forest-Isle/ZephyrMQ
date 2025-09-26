@@ -5,46 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba118c5f-3bb6-45d1-ab39-cc8d029162c1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.claude/settings.local.json" beforeDir="false" afterPath="$PROJECT_DIR$/.claude/settings.local.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TODO.md" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-admin/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-admin/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-admin/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-admin/target/zephyr-admin-1.0.0-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/zephyr-broker-1.0.0-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-client/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-client/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-client/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-client/target/zephyr-client-1.0.0-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-common/src/main/java/com/zephyr/common/config/BrokerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-common/src/main/java/com/zephyr/common/config/BrokerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-common/target/classes/com/zephyr/common/config/BrokerConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-common/target/classes/com/zephyr/common/config/BrokerConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-common/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-common/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-common/target/zephyr-common-1.0.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-common/target/zephyr-common-1.0.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-examples/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-examples/target/zephyr-examples-1.0.0-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-nameserver/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-nameserver/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-nameserver/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-nameserver/target/zephyr-nameserver-1.0.0-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-protocol/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-protocol/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-protocol/target/zephyr-protocol-1.0.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-protocol/target/zephyr-protocol-1.0.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/src/main/java/com/zephyr/storage/commitlog/CommitLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/src/main/java/com/zephyr/storage/commitlog/CommitLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/classes/com/zephyr/storage/commitlog/CommitLog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/classes/com/zephyr/storage/commitlog/CommitLog$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/classes/com/zephyr/storage/commitlog/CommitLog$PutMessageResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/classes/com/zephyr/storage/commitlog/CommitLog$PutMessageResult.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/classes/com/zephyr/storage/commitlog/CommitLog$PutMessageStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/classes/com/zephyr/storage/commitlog/CommitLog$PutMessageStatus.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/classes/com/zephyr/storage/commitlog/CommitLog.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/classes/com/zephyr/storage/commitlog/CommitLog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/TEST-com.zephyr.storage.commitlog.FileRollingServiceTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/TEST-com.zephyr.storage.commitlog.FileRollingServiceTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/com.zephyr.storage.commitlog.FileRollingServiceTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/com.zephyr.storage.commitlog.FileRollingServiceTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/zephyr-storage-1.0.0-SNAPSHOT.jar" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +34,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "SHELLCHECK.PATH": "/home/wuqisen/.local/share/JetBrains/IntelliJIdea2025.2/Shell Script/shellcheck",
     "git-widget-placeholder": "main",
@@ -129,7 +91,8 @@
       <workItem from="1758436927463" duration="112000" />
       <workItem from="1758437051214" duration="17240000" />
       <workItem from="1758675246073" duration="35000" />
-      <workItem from="1758675296412" duration="6760000" />
+      <workItem from="1758675296412" duration="7971000" />
+      <workItem from="1758809178573" duration="3614000" />
     </task>
     <servers />
   </component>

@@ -1,9 +1,14 @@
 com/zephyr/client/consumer/DefaultZephyrPushConsumer.class
+com/zephyr/client/route/TopicRouteInfoManager$TopicRouteData.class
+com/zephyr/client/partition/MessageQueueSelector.class
+com/zephyr/client/consumer/ZephyrPushConsumer.class
+com/zephyr/client/consumer/ConsumeOrderlyStatus.class
+com/zephyr/client/producer/DefaultZephyrProducer.class
 com/zephyr/client/consumer/ConsumeOrderlyContext.class
 com/zephyr/client/producer/ZephyrProducer.class
 com/zephyr/client/producer/SendCallback.class
-com/zephyr/client/consumer/ZephyrPushConsumer.class
 com/zephyr/client/consumer/MessageListener.class
-com/zephyr/client/consumer/ConsumeOrderlyStatus.class
+com/zephyr/client/partition/SelectMessageQueueByHash.class
+com/zephyr/client/partition/SelectMessageQueueByRoundRobin.class
 com/zephyr/client/consumer/ConsumeFromWhere.class
-com/zephyr/client/producer/DefaultZephyrProducer.class
+com/zephyr/client/route/TopicRouteInfoManager.class

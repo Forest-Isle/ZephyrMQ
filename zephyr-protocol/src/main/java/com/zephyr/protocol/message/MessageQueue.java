@@ -5,6 +5,8 @@ public class MessageQueue {
     private String topic;
     private String brokerName;
     private int queueId;
+    private boolean readable = true;
+    private boolean writable = true;
 
     public MessageQueue() {
     }
@@ -37,6 +39,22 @@ public class MessageQueue {
 
     public void setQueueId(int queueId) {
         this.queueId = queueId;
+    }
+
+    public boolean isReadable() {
+        return readable;
+    }
+
+    public void setReadable(boolean readable) {
+        this.readable = readable;
+    }
+
+    public boolean isWritable() {
+        return writable;
+    }
+
+    public void setWritable(boolean writable) {
+        this.writable = writable;
     }
 
     @Override

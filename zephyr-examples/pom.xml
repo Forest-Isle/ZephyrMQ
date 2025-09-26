@@ -21,5 +21,9 @@
             <groupId>com.zephyr</groupId>
             <artifactId>zephyr-client</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.zephyr</groupId>
+            <artifactId>zephyr-broker</artifactId>
+        </dependency>
     </dependencies>
 </project>
