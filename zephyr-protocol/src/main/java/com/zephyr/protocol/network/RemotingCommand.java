@@ -32,6 +32,7 @@ public class RemotingCommand {
     private Map<String, String> extFields;
 
     private transient byte[] body;
+    private transient Object customHeader;
 
     public static RemotingCommand createRequestCommand(int code) {
         RemotingCommand cmd = new RemotingCommand();
@@ -56,6 +57,16 @@ public class RemotingCommand {
     public void markResponseType() {
         int bits = 1 << 0;
         this.flag &= ~bits;
+    }
+
+    public void markOnewayRPC() {
+        int bits = 1 << 1; // Use second bit for oneway flag
+        this.flag |= bits;
+    }
+
+    public boolean isOnewayRPC() {
+        int bits = 1 << 1;
+        return (this.flag & bits) == bits;
     }
 
     public boolean isRequestType() {
@@ -110,6 +121,14 @@ public class RemotingCommand {
         this.opaque = opaque;
     }
 
+    public int getRequestId() {
+        return this.opaque;
+    }
+
+    public void setRequestId(int requestId) {
+        this.opaque = requestId;
+    }
+
     public int getFlag() {
         return flag;
     }
@@ -140,6 +159,14 @@ public class RemotingCommand {
 
     public void setBody(byte[] body) {
         this.body = body;
+    }
+
+    public Object getCustomHeader() {
+        return customHeader;
+    }
+
+    public void setCustomHeader(Object customHeader) {
+        this.customHeader = customHeader;
     }
 
     @Override

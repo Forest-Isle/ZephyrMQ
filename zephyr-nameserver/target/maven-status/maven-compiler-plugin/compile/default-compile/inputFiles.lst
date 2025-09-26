@@ -1,4 +1,4 @@
-/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-nameserver/src/main/java/com/zephyr/nameserver/NameServerConfig.java
-/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-nameserver/src/main/java/com/zephyr/nameserver/processor/DefaultRequestProcessor.java
-/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-nameserver/src/main/java/com/zephyr/nameserver/routeinfo/RouteInfoManager.java
-/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-nameserver/src/main/java/com/zephyr/nameserver/ZephyrNameServer.java
+/Users/wuqisen/Desktop/learning/ZephyrMQ/zephyr-nameserver/src/main/java/com/zephyr/nameserver/routeinfo/RouteInfoManager.java
+/Users/wuqisen/Desktop/learning/ZephyrMQ/zephyr-nameserver/src/main/java/com/zephyr/nameserver/processor/DefaultRequestProcessor.java
+/Users/wuqisen/Desktop/learning/ZephyrMQ/zephyr-nameserver/src/main/java/com/zephyr/nameserver/ZephyrNameServer.java
+/Users/wuqisen/Desktop/learning/ZephyrMQ/zephyr-nameserver/src/main/java/com/zephyr/nameserver/NameServerConfig.java

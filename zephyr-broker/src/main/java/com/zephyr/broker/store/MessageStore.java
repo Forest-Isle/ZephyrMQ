@@ -1,6 +1,7 @@
 package com.zephyr.broker.store;
 
 import com.zephyr.protocol.message.MessageExt;
+import com.zephyr.storage.commitlog.CommitLog.PutMessageResult;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface MessageStore {
 
     void shutdown();
 
-    boolean putMessage(MessageExt messageExt);
+    PutMessageResult putMessage(MessageExt messageExt);
 
     List<MessageExt> getMessage(String topic, int queueId, long offset, int maxMsgNums);
 

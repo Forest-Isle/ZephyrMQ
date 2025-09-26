@@ -3,6 +3,8 @@ package com.zephyr.broker.dlq;
 import com.zephyr.protocol.message.Message;
 import com.zephyr.protocol.message.MessageQueue;
 import com.zephyr.broker.store.MessageStore;
+import com.zephyr.protocol.message.MessageExt;
+import com.zephyr.storage.commitlog.CommitLog.PutMessageResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,14 +57,20 @@ public class DeadLetterQueueManager {
             dlqMessage.setTopic(dlqTopic);
 
             // Store to DLQ topic
-            // TODO: Use actual message store implementation
-            logger.info("Message sent to dead letter queue: topic={}, msgId={}, reason={}",
-                       dlqTopic, originalMessage.getProperty("msgId"), reason);
+            MessageExt dlqMessageExt = convertToMessageExt(dlqMessage);
+            PutMessageResult result = messageStore.putMessage(dlqMessageExt);
 
-            // Update statistics
-            dlqStats.computeIfAbsent(originalTopic, k -> new AtomicLong(0)).incrementAndGet();
+            if (result != null && result.isOk()) {
+                logger.info("Message sent to dead letter queue: topic={}, msgId={}, reason={}",
+                           dlqTopic, originalMessage.getProperty("msgId"), reason);
 
-            return true;
+                // Update statistics
+                dlqStats.computeIfAbsent(originalTopic, k -> new AtomicLong(0)).incrementAndGet();
+                return true;
+            } else {
+                logger.error("Failed to store message to DLQ: {}", result != null ? result.getStatus() : "null result");
+                return false;
+            }
 
         } catch (Exception e) {
             logger.error("Failed to send message to dead letter queue", e);
@@ -93,14 +101,20 @@ public class DeadLetterQueueManager {
             retryMessage.setDelayTimeLevel(delayLevel);
 
             // Store to retry topic
-            // TODO: Use actual message store implementation
-            logger.info("Message sent to retry topic: topic={}, msgId={}, retryCount={}",
-                       retryTopic, originalMessage.getProperty("msgId"), retryCount);
+            MessageExt retryMessageExt = convertToMessageExt(retryMessage);
+            PutMessageResult result = messageStore.putMessage(retryMessageExt);
 
-            // Update statistics
-            retryStats.computeIfAbsent(originalTopic, k -> new AtomicLong(0)).incrementAndGet();
+            if (result != null && result.isOk()) {
+                logger.info("Message sent to retry topic: topic={}, msgId={}, retryCount={}",
+                           retryTopic, originalMessage.getProperty("msgId"), retryCount);
 
-            return true;
+                // Update statistics
+                retryStats.computeIfAbsent(originalTopic, k -> new AtomicLong(0)).incrementAndGet();
+                return true;
+            } else {
+                logger.error("Failed to store message to retry topic: {}", result != null ? result.getStatus() : "null result");
+                return false;
+            }
 
         } catch (Exception e) {
             logger.error("Failed to send message to retry topic", e);
@@ -245,5 +259,26 @@ public class DeadLetterQueueManager {
         }
 
         return retryMessage;
+    }
+
+    private MessageExt convertToMessageExt(Message message) {
+        MessageExt messageExt = new MessageExt();
+        messageExt.setTopic(message.getTopic());
+        messageExt.setBody(message.getBody());
+        messageExt.setFlag(message.getFlag());
+        messageExt.setTags(message.getTags());
+        messageExt.setKeys(message.getKeys());
+        messageExt.setProperties(message.getProperties());
+        messageExt.setDelayTimeLevel(message.getDelayTimeLevel());
+        messageExt.setBornTimestamp(System.currentTimeMillis());
+        messageExt.setStoreTimestamp(System.currentTimeMillis());
+
+        // Generate message ID if not present
+        String msgId = message.getProperties() != null ?
+                      message.getProperties().get("msgId") :
+                      "DLQ_" + System.currentTimeMillis() + "_" + Thread.currentThread().getId();
+        messageExt.setMsgId(msgId);
+
+        return messageExt;
     }
 }

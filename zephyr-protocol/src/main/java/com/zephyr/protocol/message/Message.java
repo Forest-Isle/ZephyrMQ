@@ -61,6 +61,21 @@ public class Message implements Serializable {
         }
     }
 
+    public String getPropertiesString() {
+        if (null == this.properties || this.properties.isEmpty()) {
+            return "";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<String, String> entry : this.properties.entrySet()) {
+            if (sb.length() > 0) {
+                sb.append("&");
+            }
+            sb.append(entry.getKey()).append("=").append(entry.getValue());
+        }
+        return sb.toString();
+    }
+
     // Getters and Setters
     public String getTopic() {
         return topic;

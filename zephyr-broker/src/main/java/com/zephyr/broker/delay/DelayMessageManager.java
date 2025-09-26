@@ -3,6 +3,8 @@ package com.zephyr.broker.delay;
 import com.zephyr.protocol.message.Message;
 import com.zephyr.protocol.message.MessageQueue;
 import com.zephyr.broker.store.MessageStore;
+import com.zephyr.protocol.message.MessageExt;
+import com.zephyr.storage.commitlog.CommitLog.PutMessageResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,6 +52,7 @@ public class DelayMessageManager {
     private final AtomicLong totalDelayedMessages = new AtomicLong(0);
     private final AtomicLong deliveredDelayedMessages = new AtomicLong(0);
     private final AtomicLong cancelledDelayedMessages = new AtomicLong(0);
+    private final AtomicLong failedDelayedMessages = new AtomicLong(0);
 
     public DelayMessageManager(MessageStore messageStore) {
         this.messageStore = messageStore;
@@ -205,11 +208,21 @@ public class DelayMessageManager {
 
     private String deliverMessageNow(Message message, MessageQueue targetQueue) {
         try {
-            // TODO: Integrate with actual message store
             String msgId = generateMessageId();
-            logger.info("Delivered message immediately: {} to queue: {}", msgId, targetQueue);
-            deliveredDelayedMessages.incrementAndGet();
-            return msgId;
+
+            // Create MessageExt for storage
+            MessageExt messageExt = createMessageExt(message, msgId, targetQueue);
+
+            // Store message using message store
+            PutMessageResult result = messageStore.putMessage(messageExt);
+            if (result != null && result.isOk()) {
+                logger.info("Delivered message immediately: {} to queue: {}", msgId, targetQueue);
+                deliveredDelayedMessages.incrementAndGet();
+                return msgId;
+            } else {
+                logger.error("Failed to store message: {}", result != null ? result.getStatus() : "null result");
+                return null;
+            }
         } catch (Exception e) {
             logger.error("Failed to deliver message immediately", e);
             return null;
@@ -224,21 +237,49 @@ public class DelayMessageManager {
         }
 
         try {
-            // TODO: Integrate with actual message store
-            // messageStore.putMessage(delayedMessage.getTargetQueue(), delayedMessage.getMessage());
+            // Create MessageExt for delayed delivery
+            MessageExt messageExt = createMessageExt(
+                delayedMessage.getMessage(), msgId, delayedMessage.getTargetQueue());
 
-            deliveredDelayedMessages.incrementAndGet();
-            logger.info("Delivered delayed message: {} to queue: {}",
-                       msgId, delayedMessage.getTargetQueue());
-
+            // Store message using message store
+            PutMessageResult result = messageStore.putMessage(messageExt);
+            if (result != null && result.isOk()) {
+                deliveredDelayedMessages.incrementAndGet();
+                logger.info("Delivered delayed message: {} to queue: {}",
+                           msgId, delayedMessage.getTargetQueue());
+            } else {
+                logger.error("Failed to deliver delayed message: {}, status: {}",
+                    msgId, result != null ? result.getStatus() : "null result");
+                // Consider retry or dead letter queue
+                handleDeliveryFailure(delayedMessage, msgId);
+            }
         } catch (Exception e) {
             logger.error("Failed to deliver delayed message: " + msgId, e);
-            // TODO: Consider retry or dead letter queue
+            handleDeliveryFailure(delayedMessage, msgId);
         }
     }
 
     private String generateMessageId() {
         return "DELAY_" + System.currentTimeMillis() + "_" + Thread.currentThread().getId();
+    }
+
+    private MessageExt createMessageExt(Message message, String msgId, MessageQueue targetQueue) {
+        MessageExt messageExt = new MessageExt();
+        messageExt.setTopic(message.getTopic());
+        messageExt.setBody(message.getBody());
+        messageExt.setFlag(message.getFlag());
+        messageExt.setProperties(message.getProperties());
+        messageExt.setMsgId(msgId);
+        messageExt.setQueueId(targetQueue.getQueueId());
+        messageExt.setBornTimestamp(System.currentTimeMillis());
+        messageExt.setStoreTimestamp(System.currentTimeMillis());
+        return messageExt;
+    }
+
+    private void handleDeliveryFailure(DelayedMessage delayedMessage, String msgId) {
+        // Could implement retry logic or send to dead letter queue
+        logger.warn("Handling delivery failure for delayed message: {}", msgId);
+        failedDelayedMessages.incrementAndGet();
     }
 
     /**

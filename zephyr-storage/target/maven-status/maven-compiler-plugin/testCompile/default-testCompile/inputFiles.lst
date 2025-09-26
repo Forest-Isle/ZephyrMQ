@@ -1,6 +1,6 @@
-/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-storage/src/test/java/com/zephyr/storage/checksum/MessageChecksumTest.java
-/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-storage/src/test/java/com/zephyr/storage/integrity/MessageIntegrityCheckerTest.java
-/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-storage/src/test/java/com/zephyr/storage/commitlog/FileRollingServiceTest.java
-/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-storage/src/test/java/com/zephyr/storage/index/SparseIndexTest.java
-/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-storage/src/test/java/com/zephyr/storage/compression/MessageCompressorTest.java
-/home/wuqisen/DevelopMaterial/ZephyrMQ/zephyr-storage/src/test/java/com/zephyr/storage/flush/AsyncFlushServiceTest.java
+/Users/wuqisen/Desktop/learning/ZephyrMQ/zephyr-storage/src/test/java/com/zephyr/storage/flush/AsyncFlushServiceTest.java
+/Users/wuqisen/Desktop/learning/ZephyrMQ/zephyr-storage/src/test/java/com/zephyr/storage/checksum/MessageChecksumTest.java
+/Users/wuqisen/Desktop/learning/ZephyrMQ/zephyr-storage/src/test/java/com/zephyr/storage/compression/MessageCompressorTest.java
+/Users/wuqisen/Desktop/learning/ZephyrMQ/zephyr-storage/src/test/java/com/zephyr/storage/index/SparseIndexTest.java
+/Users/wuqisen/Desktop/learning/ZephyrMQ/zephyr-storage/src/test/java/com/zephyr/storage/commitlog/FileRollingServiceTest.java
+/Users/wuqisen/Desktop/learning/ZephyrMQ/zephyr-storage/src/test/java/com/zephyr/storage/integrity/MessageIntegrityCheckerTest.java

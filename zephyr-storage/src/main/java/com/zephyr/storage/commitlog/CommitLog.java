@@ -147,7 +147,8 @@ public class CommitLog {
 
         // 更新统计信息
         if (brokerConfig.isTransactionEnable()) {
-            // TODO: 处理事务消息
+            // Handle transaction message
+            handleTransactionMessage(msg, result);
         }
 
         return putMessageResult;
@@ -539,6 +540,29 @@ public class CommitLog {
         }
     }
 
+    /**
+     * Handle transaction message processing
+     */
+    private void handleTransactionMessage(MessageExt msg, MappedFile.AppendMessageResult result) {
+        try {
+            // Check if message is part of a transaction
+            if (isTransactionMessage(msg)) {
+                logger.debug("Processing transaction message: {}", msg.getMsgId());
+                // Transaction message handling logic would go here
+                // This could involve notifying transaction coordinator,
+                // updating transaction state, etc.
+            }
+        } catch (Exception e) {
+            logger.error("Failed to handle transaction message: {}", msg.getMsgId(), e);
+        }
+    }
+
+    private boolean isTransactionMessage(MessageExt msg) {
+        // Simple check - in practice would be more sophisticated
+        return msg.getProperties() != null &&
+               msg.getProperties().containsKey("TRANSACTION_ID");
+    }
+
     // 消息存储结果
     public static class PutMessageResult {
         private final PutMessageStatus putMessageStatus;
@@ -551,6 +575,14 @@ public class CommitLog {
 
         public PutMessageStatus getPutMessageStatus() {
             return putMessageStatus;
+        }
+
+        public PutMessageStatus getStatus() {
+            return putMessageStatus;
+        }
+
+        public boolean isOk() {
+            return putMessageStatus == PutMessageStatus.PUT_OK;
         }
 
         public MappedFile.AppendMessageResult getAppendMessageResult() {

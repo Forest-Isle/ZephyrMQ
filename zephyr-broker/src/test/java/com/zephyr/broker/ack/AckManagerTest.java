@@ -3,9 +3,12 @@ package com.zephyr.broker.ack;
 import com.zephyr.protocol.ack.MessageAck;
 import com.zephyr.protocol.ack.MessageAck.AckStatus;
 import com.zephyr.protocol.message.MessageQueue;
+import com.zephyr.broker.dlq.DeadLetterQueueManager;
+import com.zephyr.broker.store.MessageStore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,10 +16,17 @@ public class AckManagerTest {
 
     private AckManager ackManager;
     private MessageQueue testQueue;
+    private DeadLetterQueueManager mockDlqManager;
+    private MessageStore mockMessageStore;
 
     @BeforeEach
     void setUp() {
-        ackManager = new AckManager(5000, 3, 1000); // 5s timeout, 3 retries, 1s interval
+        // Create mock dependencies
+        mockMessageStore = Mockito.mock(MessageStore.class);
+        mockDlqManager = new DeadLetterQueueManager(mockMessageStore);
+
+        // Create AckManager with proper constructor
+        ackManager = new AckManager(mockDlqManager, 5000, 3, 1000); // 5s timeout, 3 retries, 1s interval
 
         testQueue = new MessageQueue("testTopic", "broker1", 0);
     }

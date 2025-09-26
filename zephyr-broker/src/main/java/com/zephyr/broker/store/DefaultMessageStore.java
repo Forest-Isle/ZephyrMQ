@@ -3,6 +3,8 @@ package com.zephyr.broker.store;
 import com.zephyr.common.config.BrokerConfig;
 import com.zephyr.protocol.message.MessageExt;
 import com.zephyr.protocol.message.MessageQueue;
+import com.zephyr.storage.commitlog.CommitLog.PutMessageResult;
+import com.zephyr.storage.commitlog.CommitLog.PutMessageStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,11 +63,11 @@ public class DefaultMessageStore implements MessageStore {
     }
 
     @Override
-    public boolean putMessage(MessageExt messageExt) {
+    public PutMessageResult putMessage(MessageExt messageExt) {
         try {
             if (messageExt == null) {
                 logger.warn("Message is null, cannot store");
-                return false;
+                return new PutMessageResult(PutMessageStatus.MESSAGE_ILLEGAL, null);
             }
 
             // Set physical offset
@@ -94,11 +96,11 @@ public class DefaultMessageStore implements MessageStore {
             logger.debug("Message stored successfully: msgId={}, topic={}, queueId={}, queueOffset={}",
                     messageExt.getMsgId(), topic, queueId, messageExt.getQueueOffset());
 
-            return true;
+            return new PutMessageResult(PutMessageStatus.PUT_OK, null);
 
         } catch (Exception e) {
             logger.error("Failed to store message", e);
-            return false;
+            return new PutMessageResult(PutMessageStatus.SERVICE_NOT_AVAILABLE, null);
         }
     }
 

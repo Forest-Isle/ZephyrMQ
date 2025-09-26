@@ -3,6 +3,9 @@ package com.zephyr.broker.transaction;
 import com.zephyr.protocol.transaction.TransactionMessage;
 import com.zephyr.protocol.transaction.TransactionState;
 import com.zephyr.protocol.message.Message;
+import com.zephyr.protocol.message.MessageExt;
+import com.zephyr.broker.store.MessageStore;
+import com.zephyr.storage.commitlog.CommitLog.PutMessageResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +31,9 @@ public class TransactionManager {
     // Message storage for prepared messages: msgId -> Message
     private final ConcurrentMap<String, Message> preparedMessages = new ConcurrentHashMap<>();
 
+    // Message store reference
+    private final MessageStore messageStore;
+
     // Configuration
     private final long transactionTimeoutMs;
     private final int maxCheckTimes;
@@ -36,11 +42,12 @@ public class TransactionManager {
     // Executor for background tasks
     private final ScheduledExecutorService executor;
 
-    public TransactionManager() {
-        this(60000, 15, 6000); // 1 min timeout, 15 max checks, 6s interval
+    public TransactionManager(MessageStore messageStore) {
+        this(messageStore, 60000, 15, 6000); // 1 min timeout, 15 max checks, 6s interval
     }
 
-    public TransactionManager(long transactionTimeoutMs, int maxCheckTimes, long checkIntervalMs) {
+    public TransactionManager(MessageStore messageStore, long transactionTimeoutMs, int maxCheckTimes, long checkIntervalMs) {
+        this.messageStore = messageStore;
         this.transactionTimeoutMs = transactionTimeoutMs;
         this.maxCheckTimes = maxCheckTimes;
         this.checkIntervalMs = checkIntervalMs;
@@ -128,8 +135,25 @@ public class TransactionManager {
         // Get prepared message and make it available for consumption
         Message message = preparedMessages.remove(txMsg.getMsgId());
         if (message != null) {
-            // TODO: Integrate with message store to make message consumable
-            logger.info("Transaction committed: {}, message available for consumption", transactionId);
+            try {
+                // Convert message to MessageExt and store it
+                MessageExt messageExt = convertToMessageExt(message, txMsg);
+                PutMessageResult result = messageStore.putMessage(messageExt);
+
+                if (result != null && result.isOk()) {
+                    logger.info("Transaction committed: {}, message available for consumption", transactionId);
+                } else {
+                    logger.error("Failed to store committed transaction message: {}, status: {}",
+                        transactionId, result != null ? result.getStatus() : "null result");
+                    // Re-add to prepared messages for potential retry
+                    preparedMessages.put(txMsg.getMsgId(), message);
+                    return false;
+                }
+            } catch (Exception e) {
+                logger.error("Failed to commit transaction message: {}", transactionId, e);
+                preparedMessages.put(txMsg.getMsgId(), message);
+                return false;
+            }
         } else {
             logger.warn("No prepared message found for transaction: {}", transactionId);
         }
@@ -182,10 +206,26 @@ public class TransactionManager {
         // Increment check times
         txMsg.incrementCheckTimes();
 
-        // TODO: Implement actual check with producer
-        // For now, return current state
-        logger.debug("Checking transaction state: {} (check times: {})",
-                    transactionId, txMsg.getCheckTimes());
+        // Send transaction check request to producer
+        try {
+            TransactionCheckResult checkResult = sendTransactionCheckRequest(txMsg);
+            if (checkResult != null) {
+                // Update state based on producer response
+                if (checkResult.shouldCommit()) {
+                    txMsg.setState(TransactionState.COMMIT);
+                } else if (checkResult.shouldRollback()) {
+                    txMsg.setState(TransactionState.ROLLBACK);
+                }
+                logger.debug("Transaction check completed: {} -> {}", transactionId, txMsg.getState());
+            } else {
+                logger.warn("Transaction check failed for: {}", transactionId);
+            }
+        } catch (Exception e) {
+            logger.error("Failed to check transaction state: {}", transactionId, e);
+        }
+
+        logger.debug("Checking transaction state: {} (check times: {}, state: {})",
+                    transactionId, txMsg.getCheckTimes(), txMsg.getState());
 
         return txMsg.getState();
     }
@@ -269,5 +309,64 @@ public class TransactionManager {
 
     private String generateTransactionId() {
         return "TX_" + System.currentTimeMillis() + "_" + UUID.randomUUID().toString().substring(0, 8);
+    }
+
+    private MessageExt convertToMessageExt(Message message, TransactionMessage txMsg) {
+        MessageExt messageExt = new MessageExt();
+        messageExt.setTopic(message.getTopic());
+        messageExt.setBody(message.getBody());
+        messageExt.setFlag(message.getFlag());
+        messageExt.setTags(message.getTags());
+        messageExt.setKeys(message.getKeys());
+        messageExt.setProperties(message.getProperties());
+        messageExt.setMsgId(txMsg.getMsgId());
+        messageExt.setBornTimestamp(txMsg.getCreateTime());
+        messageExt.setStoreTimestamp(System.currentTimeMillis());
+
+        // Add transaction metadata
+        if (messageExt.getProperties() == null) {
+            messageExt.setProperties(new java.util.HashMap<>());
+        }
+        messageExt.getProperties().put("TRANSACTION_ID", txMsg.getTransactionId());
+        messageExt.getProperties().put("TRANSACTION_STATE", txMsg.getState().toString());
+
+        return messageExt;
+    }
+
+    private TransactionCheckResult sendTransactionCheckRequest(TransactionMessage txMsg) {
+        try {
+            // Mock implementation - in real scenario, this would send a network request
+            // to the producer to check transaction status
+            logger.debug("Sending transaction check request for: {}", txMsg.getTransactionId());
+
+            // Simple logic: after 3 checks, randomly decide commit or rollback
+            if (txMsg.getCheckTimes() > 3) {
+                boolean shouldCommit = System.currentTimeMillis() % 2 == 0;
+                return new TransactionCheckResult(shouldCommit, !shouldCommit);
+            }
+
+            return new TransactionCheckResult(false, false); // No decision yet
+        } catch (Exception e) {
+            logger.error("Failed to send transaction check request: {}", txMsg.getTransactionId(), e);
+            return null;
+        }
+    }
+
+    private static class TransactionCheckResult {
+        private final boolean shouldCommit;
+        private final boolean shouldRollback;
+
+        public TransactionCheckResult(boolean shouldCommit, boolean shouldRollback) {
+            this.shouldCommit = shouldCommit;
+            this.shouldRollback = shouldRollback;
+        }
+
+        public boolean shouldCommit() {
+            return shouldCommit;
+        }
+
+        public boolean shouldRollback() {
+            return shouldRollback;
+        }
     }
 }

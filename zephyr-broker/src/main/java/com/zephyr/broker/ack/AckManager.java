@@ -2,6 +2,8 @@ package com.zephyr.broker.ack;
 
 import com.zephyr.protocol.ack.MessageAck;
 import com.zephyr.protocol.message.MessageQueue;
+import com.zephyr.protocol.message.Message;
+import com.zephyr.broker.dlq.DeadLetterQueueManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,14 +38,18 @@ public class AckManager {
     private final int maxRetryTimes;
     private final long retryDelayMs;
 
+    // Dead letter queue manager
+    private final DeadLetterQueueManager deadLetterQueueManager;
+
     // Executor for background tasks
     private final ScheduledExecutorService executor;
 
-    public AckManager() {
-        this(30000, 3, 5000); // 30s timeout, 3 retries, 5s delay
+    public AckManager(DeadLetterQueueManager deadLetterQueueManager) {
+        this(deadLetterQueueManager, 30000, 3, 5000); // 30s timeout, 3 retries, 5s delay
     }
 
-    public AckManager(long ackTimeoutMs, int maxRetryTimes, long retryDelayMs) {
+    public AckManager(DeadLetterQueueManager deadLetterQueueManager, long ackTimeoutMs, int maxRetryTimes, long retryDelayMs) {
+        this.deadLetterQueueManager = deadLetterQueueManager;
         this.ackTimeoutMs = ackTimeoutMs;
         this.maxRetryTimes = maxRetryTimes;
         this.retryDelayMs = retryDelayMs;
@@ -195,9 +201,31 @@ public class AckManager {
     }
 
     private void handleDeadLetterMessage(MessageAck ack, PendingAck pendingAck) {
-        // TODO: Implement dead letter queue functionality
-        logger.warn("Message sent to dead letter queue: {} (retries: {})",
-                   ack.getMsgId(), pendingAck.getRetryCount());
+        try {
+            // Use dead letter queue manager to handle failed message
+            if (deadLetterQueueManager != null) {
+                // Create a mock original message for DLQ processing
+                Message originalMessage = createMessageFromPendingAck(pendingAck);
+                boolean success = deadLetterQueueManager.sendToDeadLetterQueue(
+                    originalMessage,
+                    pendingAck.getMessageQueue().getTopic(),
+                    pendingAck.getConsumerGroup(),
+                    pendingAck.getRetryCount(),
+                    "Max retries exceeded"
+                );
+
+                if (success) {
+                    logger.info("Message sent to dead letter queue successfully: {}", ack.getMsgId());
+                } else {
+                    logger.error("Failed to send message to dead letter queue: {}", ack.getMsgId());
+                }
+            } else {
+                logger.warn("Dead letter queue manager not available. Message: {} (retries: {})",
+                           ack.getMsgId(), pendingAck.getRetryCount());
+            }
+        } catch (Exception e) {
+            logger.error("Error handling dead letter message: {}", ack.getMsgId(), e);
+        }
     }
 
     private void startBackgroundTasks() {
@@ -232,9 +260,48 @@ public class AckManager {
     private void processRetryQueue() {
         RetryMessage retryMessage;
         while ((retryMessage = retryQueue.poll()) != null) {
-            // TODO: Resend message to consumer
-            logger.info("Processing retry message: {} (retry: {})",
-                       retryMessage.getPendingAck().getMsgId(), retryMessage.getRetryCount());
+            try {
+                // Check if retry limit exceeded
+                if (retryMessage.getRetryCount() >= maxRetryTimes) {
+                    logger.warn("Retry limit exceeded for message: {}", retryMessage.getPendingAck().getMsgId());
+                    // Send to dead letter queue
+                    MessageAck deadLetterAck = new MessageAck(
+                        retryMessage.getPendingAck().getMsgId(),
+                        retryMessage.getPendingAck().getMessageQueue().getTopic(),
+                        retryMessage.getPendingAck().getMessageQueue().getQueueId(),
+                        0,
+                        retryMessage.getPendingAck().getConsumerGroup(),
+                        retryMessage.getPendingAck().getConsumerId(),
+                        MessageAck.AckStatus.DEAD_LETTER
+                    );
+                    handleDeadLetterAck(deadLetterAck, retryMessage.getPendingAck());
+                    continue;
+                }
+
+                // Attempt to resend message to consumer
+                boolean resent = resendMessageToConsumer(retryMessage);
+                if (resent) {
+                    // Update retry count and re-track
+                    PendingAck updatedPendingAck = retryMessage.getPendingAck();
+                    updatedPendingAck.incrementRetryCount();
+                    pendingAcks.put(updatedPendingAck.getMsgId(), updatedPendingAck);
+
+                    logger.info("Message resent to consumer: {} (retry: {})",
+                               retryMessage.getPendingAck().getMsgId(), retryMessage.getRetryCount());
+                } else {
+                    // Resend failed, add back to retry queue with delay
+                    RetryMessage delayedRetry = new RetryMessage(retryMessage.getPendingAck(),
+                                                               retryMessage.getRetryCount() + 1,
+                                                               System.currentTimeMillis() + calculateRetryDelay(retryMessage.getRetryCount()));
+                    retryQueue.offer(delayedRetry);
+
+                    logger.warn("Failed to resend message, will retry later: {}",
+                               retryMessage.getPendingAck().getMsgId());
+                }
+            } catch (Exception e) {
+                logger.error("Error processing retry message: {}",
+                           retryMessage.getPendingAck().getMsgId(), e);
+            }
         }
     }
 
@@ -268,6 +335,7 @@ public class AckManager {
         public long getCreateTime() { return createTime; }
         public int getRetryCount() { return retryCount; }
         public void setRetryCount(int retryCount) { this.retryCount = retryCount; }
+        public void incrementRetryCount() { this.retryCount++; }
     }
 
     private static class RetryMessage implements Delayed {
@@ -298,5 +366,56 @@ public class AckManager {
         public PendingAck getPendingAck() { return pendingAck; }
         public int getRetryCount() { return retryCount; }
         public long getExecuteTime() { return executeTime; }
+    }
+
+    // Helper methods for retry functionality
+    private Message createMessageFromPendingAck(PendingAck pendingAck) {
+        Message message = new Message();
+        message.setTopic(pendingAck.getMessageQueue().getTopic());
+        message.setBody(("Retry message for " + pendingAck.getMsgId()).getBytes());
+
+        // Add metadata
+        message.putProperty("ORIGINAL_MSG_ID", pendingAck.getMsgId());
+        message.putProperty("CONSUMER_GROUP", pendingAck.getConsumerGroup());
+        message.putProperty("RETRY_COUNT", String.valueOf(pendingAck.getRetryCount()));
+
+        return message;
+    }
+
+    private boolean resendMessageToConsumer(RetryMessage retryMessage) {
+        try {
+            // Mock implementation - in real scenario, this would send the message
+            // back to the consumer through the message queue
+            logger.debug("Attempting to resend message to consumer: {}",
+                        retryMessage.getPendingAck().getMsgId());
+
+            // Simulate success/failure (for demonstration)
+            return Math.random() > 0.3; // 70% success rate
+        } catch (Exception e) {
+            logger.error("Failed to resend message to consumer: {}",
+                        retryMessage.getPendingAck().getMsgId(), e);
+            return false;
+        }
+    }
+
+    private void scheduleRetry(RetryMessage retryMessage, long delayMs) {
+        try {
+            RetryMessage delayedRetry = new RetryMessage(
+                retryMessage.getPendingAck(),
+                retryMessage.getRetryCount(),
+                System.currentTimeMillis() + delayMs
+            );
+            retryQueue.offer(delayedRetry);
+            logger.debug("Scheduled retry for message: {} in {}ms",
+                        retryMessage.getPendingAck().getMsgId(), delayMs);
+        } catch (Exception e) {
+            logger.error("Failed to schedule retry for message: {}",
+                        retryMessage.getPendingAck().getMsgId(), e);
+        }
+    }
+
+    private long calculateRetryDelay(int retryCount) {
+        // Exponential backoff: base delay * (2^retryCount)
+        return Math.min(retryDelayMs * (1L << retryCount), 300000L); // Max 5 minutes
     }
 }

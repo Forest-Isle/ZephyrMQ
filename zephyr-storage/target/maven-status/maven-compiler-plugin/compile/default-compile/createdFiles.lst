@@ -2,8 +2,8 @@ com/zephyr/storage/flush/AsyncFlushService.class
 com/zephyr/storage/flush/AsyncFlushService$FlushResult.class
 com/zephyr/storage/commitlog/CommitLog$1.class
 com/zephyr/storage/commitlog/MappedFile$AppendMessageStatus.class
-com/zephyr/storage/commitlog/FileRollingService$RollingStrategy.class
 com/zephyr/storage/flush/AsyncFlushService$FlushStrategy.class
+com/zephyr/storage/commitlog/FileRollingService$RollingStrategy.class
 com/zephyr/storage/commitlog/MappedFileQueue.class
 com/zephyr/storage/integrity/MessageIntegrityChecker$Severity.class
 com/zephyr/storage/commitlog/CommitLog$PutMessageResult.class
@@ -17,13 +17,13 @@ com/zephyr/storage/index/SparseIndex$IndexEntry.class
 com/zephyr/storage/commitlog/FileRollingService$1.class
 com/zephyr/storage/index/SparseIndex.class
 com/zephyr/storage/integrity/MessageIntegrityChecker$CheckViolation.class
-com/zephyr/storage/commitlog/MappedFile$AppendMessageResult.class
 com/zephyr/storage/compression/MessageCompressor$1.class
-com/zephyr/storage/checksum/MessageChecksum$ChecksumAlgorithm.class
+com/zephyr/storage/commitlog/MappedFile$AppendMessageResult.class
 com/zephyr/storage/flush/AsyncFlushService$1.class
+com/zephyr/storage/checksum/MessageChecksum$ChecksumAlgorithm.class
 com/zephyr/storage/checksum/MessageChecksum$1.class
-com/zephyr/storage/checksum/MessageChecksum.class
 com/zephyr/storage/integrity/MessageIntegrityChecker$IntegrityCheckType.class
+com/zephyr/storage/checksum/MessageChecksum.class
 com/zephyr/storage/commitlog/FileRollingService$FileRollingStats.class
 com/zephyr/storage/commitlog/CommitLog$PutMessageStatus.class
 com/zephyr/storage/commitlog/FileRollingService.class

@@ -137,6 +137,10 @@ public class BrokerConfig {
         this.namesrvAddr = namesrvAddr;
     }
 
+    public String getNameServerAddr() {
+        return namesrvAddr;
+    }
+
     public String getStorePathRootDir() {
         return storePathRootDir;
     }

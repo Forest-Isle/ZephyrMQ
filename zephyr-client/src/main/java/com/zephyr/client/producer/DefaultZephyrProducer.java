@@ -7,6 +7,10 @@ import com.zephyr.protocol.message.Message;
 import com.zephyr.protocol.message.MessageQueue;
 import com.zephyr.protocol.message.SendResult;
 import com.zephyr.protocol.message.SendStatus;
+import com.zephyr.protocol.network.NettyRemotingClient;
+import com.zephyr.protocol.network.RemotingCommand;
+import com.zephyr.protocol.network.RequestCode;
+import com.zephyr.protocol.network.ResponseCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,6 +31,7 @@ public class DefaultZephyrProducer implements ZephyrProducer {
     private final AtomicBoolean started = new AtomicBoolean(false);
     private final ExecutorService asyncSenderExecutor;
     private final TopicRouteInfoManager routeInfoManager;
+    private NettyRemotingClient remotingClient;
 
     private String producerGroup;
     private String nameserverAddresses;
@@ -44,13 +49,18 @@ public class DefaultZephyrProducer implements ZephyrProducer {
         this.producerGroup = producerGroup;
         this.asyncSenderExecutor = Executors.newFixedThreadPool(4);
         this.routeInfoManager = new TopicRouteInfoManager();
+        this.remotingClient = new NettyRemotingClient();
     }
 
     @Override
     public void start() throws Exception {
         if (started.compareAndSet(false, true)) {
             logger.info("DefaultZephyrProducer[{}] start", producerGroup);
-            // TODO: Initialize network client and connect to nameserver
+            remotingClient.start();
+            if (nameserverAddresses != null && !nameserverAddresses.trim().isEmpty()) {
+                routeInfoManager.updateNameServerAddressList(nameserverAddresses);
+            }
+            logger.info("Producer started successfully with nameserver: {}", nameserverAddresses);
         }
     }
 
@@ -59,7 +69,10 @@ public class DefaultZephyrProducer implements ZephyrProducer {
         if (started.compareAndSet(true, false)) {
             logger.info("DefaultZephyrProducer[{}] shutdown", producerGroup);
             asyncSenderExecutor.shutdown();
-            // TODO: Cleanup network connections
+            if (remotingClient != null) {
+                remotingClient.shutdown();
+            }
+            logger.info("Producer shutdown successfully");
         }
     }
 
@@ -71,11 +84,10 @@ public class DefaultZephyrProducer implements ZephyrProducer {
     @Override
     public SendResult send(Message msg, long timeout) throws Exception {
         checkMessage(msg);
+        checkProducerStarted();
 
-        // TODO: Implement actual send logic
-        // For now, return a mock result
         MessageQueue mq = selectOneMessageQueue(msg.getTopic());
-        return createMockSendResult(msg, mq);
+        return sendMessage(msg, mq, timeout);
     }
 
     @Override
@@ -87,9 +99,9 @@ public class DefaultZephyrProducer implements ZephyrProducer {
     public SendResult send(Message msg, MessageQueue mq, long timeout) throws Exception {
         checkMessage(msg);
         checkMessageQueue(mq);
+        checkProducerStarted();
 
-        // TODO: Implement actual send logic to specific queue
-        return createMockSendResult(msg, mq);
+        return sendMessage(msg, mq, timeout);
     }
 
     @Override
@@ -117,8 +129,7 @@ public class DefaultZephyrProducer implements ZephyrProducer {
 
         CompletableFuture.supplyAsync(() -> {
             try {
-                // TODO: Implement actual async send logic
-                return createMockSendResult(msg, mq);
+                return sendMessage(msg, mq, timeout);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -143,9 +154,16 @@ public class DefaultZephyrProducer implements ZephyrProducer {
     public void sendOneway(Message msg, MessageQueue mq) throws Exception {
         checkMessage(msg);
         checkMessageQueue(mq);
+        checkProducerStarted();
 
-        // TODO: Implement actual oneway send logic
-        logger.info("Send oneway message to queue: {}", mq);
+        String brokerAddr = getBrokerAddress(mq.getBrokerName());
+        if (brokerAddr == null) {
+            throw new Exception("Cannot find broker address for: " + mq.getBrokerName());
+        }
+
+        RemotingCommand request = createSendMessageRequest(msg, mq);
+        remotingClient.invokeOneway(brokerAddr, request);
+        logger.debug("Send oneway message to queue: {}", mq);
     }
 
     @Override
@@ -231,13 +249,76 @@ public class DefaultZephyrProducer implements ZephyrProducer {
         return defaultMessageQueueSelector.select(messageQueues, null, null);
     }
 
-    private SendResult createMockSendResult(Message msg, MessageQueue mq) {
+    private SendResult sendMessage(Message msg, MessageQueue mq, long timeout) throws Exception {
+        String brokerAddr = getBrokerAddress(mq.getBrokerName());
+        if (brokerAddr == null) {
+            throw new Exception("Cannot find broker address for: " + mq.getBrokerName());
+        }
+
+        RemotingCommand request = createSendMessageRequest(msg, mq);
+        RemotingCommand response = remotingClient.invokeSync(brokerAddr, request, timeout);
+
+        if (response.getCode() == ResponseCode.SUCCESS) {
+            return parseSendResult(response, msg, mq);
+        } else {
+            throw new Exception("Send message failed: " + response.getRemark());
+        }
+    }
+
+    private RemotingCommand createSendMessageRequest(Message msg, MessageQueue mq) {
+        RemotingCommand request = RemotingCommand.createRequestCommand(RequestCode.SEND_MESSAGE);
+
+        SendMessageRequestHeader header = new SendMessageRequestHeader();
+        header.producerGroup = this.producerGroup;
+        header.topic = msg.getTopic();
+        header.defaultTopic = "TBW102";
+        header.defaultTopicQueueNums = 4;
+        header.queueId = mq.getQueueId();
+        header.sysFlag = 0;
+        header.bornTimestamp = System.currentTimeMillis();
+        header.flag = msg.getFlag();
+        header.properties = msg.getPropertiesString();
+        header.reconsumeTimes = 0;
+
+        request.setCustomHeader(header);
+        request.setBody(msg.getBody());
+
+        return request;
+    }
+
+    private SendResult parseSendResult(RemotingCommand response, Message msg, MessageQueue mq) {
         SendResult result = new SendResult();
         result.setSendStatus(SendStatus.SEND_OK);
-        result.setMsgId(UUID.randomUUID().toString());
+        result.setMsgId(response.getExtFields() != null ? response.getExtFields().get("msgId") : UUID.randomUUID().toString());
         result.setMessageQueue(mq);
-        result.setQueueOffset(System.currentTimeMillis());
+
+        String queueOffset = response.getExtFields() != null ? response.getExtFields().get("queueOffset") : null;
+        result.setQueueOffset(queueOffset != null ? Long.parseLong(queueOffset) : System.currentTimeMillis());
+
         return result;
+    }
+
+    private String getBrokerAddress(String brokerName) {
+        return routeInfoManager.findBrokerAddressInPublish(brokerName);
+    }
+
+    private void checkProducerStarted() throws Exception {
+        if (!started.get()) {
+            throw new Exception("Producer is not started");
+        }
+    }
+
+    public static class SendMessageRequestHeader {
+        public String producerGroup;
+        public String topic;
+        public String defaultTopic;
+        public Integer defaultTopicQueueNums;
+        public Integer queueId;
+        public Integer sysFlag;
+        public Long bornTimestamp;
+        public Integer flag;
+        public String properties;
+        public Integer reconsumeTimes;
     }
 
     // Getters and Setters

@@ -2,20 +2,38 @@ package com.zephyr.broker.transaction;
 
 import com.zephyr.protocol.transaction.TransactionState;
 import com.zephyr.protocol.message.Message;
+import com.zephyr.protocol.message.MessageExt;
+import com.zephyr.broker.store.MessageStore;
+import com.zephyr.storage.commitlog.CommitLog.PutMessageResult;
+import com.zephyr.storage.commitlog.CommitLog.PutMessageStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 public class TransactionManagerTest {
 
     private TransactionManager transactionManager;
     private Message testMessage;
+    private MessageStore mockMessageStore;
 
     @BeforeEach
     void setUp() {
-        transactionManager = new TransactionManager(5000, 3, 1000); // 5s timeout, 3 checks, 1s interval
+        // Create mock message store
+        mockMessageStore = Mockito.mock(MessageStore.class);
+
+        // Setup mock behavior for successful put message
+        PutMessageResult successResult = Mockito.mock(PutMessageResult.class);
+        when(successResult.isOk()).thenReturn(true);
+        when(successResult.getStatus()).thenReturn(PutMessageStatus.PUT_OK);
+        when(mockMessageStore.putMessage(any(MessageExt.class))).thenReturn(successResult);
+
+        // Create TransactionManager with proper constructor
+        transactionManager = new TransactionManager(mockMessageStore, 5000, 3, 1000); // 5s timeout, 3 checks, 1s interval
 
         testMessage = new Message();
         testMessage.setTopic("testTopic");

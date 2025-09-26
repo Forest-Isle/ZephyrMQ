@@ -76,6 +76,15 @@ public class TransactionMessage implements Serializable {
         this.checkTimes++;
     }
 
+    /**
+     * Get create time (alias for prepare time)
+     *
+     * @return create time
+     */
+    public long getCreateTime() {
+        return prepareTime;
+    }
+
     @Override
     public String toString() {
         return "TransactionMessage{" +

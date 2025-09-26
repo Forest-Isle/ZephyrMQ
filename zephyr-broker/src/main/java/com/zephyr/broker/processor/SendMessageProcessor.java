@@ -9,6 +9,7 @@ import com.zephyr.protocol.network.RemotingCommand;
 import com.zephyr.protocol.network.RequestProcessor;
 import com.zephyr.protocol.network.ResponseCode;
 import io.netty.channel.ChannelHandlerContext;
+import com.zephyr.storage.commitlog.CommitLog.PutMessageResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -60,7 +61,8 @@ public class SendMessageProcessor implements RequestProcessor {
             MessageExt messageExt = createMessageExt(message);
 
             // Store message
-            boolean storeOK = broker.getMessageStore().putMessage(messageExt);
+            PutMessageResult result = broker.getMessageStore().putMessage(messageExt);
+            boolean storeOK = result.isOk();
 
             // Create response
             RemotingCommand response = RemotingCommand.createResponseCommand(ResponseCode.SUCCESS, "success");

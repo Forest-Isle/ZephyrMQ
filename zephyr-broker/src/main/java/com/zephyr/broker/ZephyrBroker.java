@@ -11,12 +11,16 @@ import com.zephyr.broker.store.DefaultMessageStore;
 import com.zephyr.broker.topic.TopicConfigManager;
 import com.zephyr.broker.subscription.SubscriptionGroupManager;
 import com.zephyr.broker.offset.ConsumerOffsetManager;
+import com.zephyr.broker.out.BrokerOuterAPI;
 import com.zephyr.common.constant.ZephyrConstants;
 import com.zephyr.protocol.network.RequestCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class ZephyrBroker {
 
@@ -31,6 +35,8 @@ public class ZephyrBroker {
     private TopicConfigManager topicConfigManager;
     private SubscriptionGroupManager subscriptionGroupManager;
     private ConsumerOffsetManager consumerOffsetManager;
+    private BrokerOuterAPI brokerOuterAPI;
+    private ScheduledExecutorService scheduledExecutorService;
 
     public ZephyrBroker(BrokerConfig brokerConfig) {
         this.brokerConfig = brokerConfig;
@@ -39,6 +45,13 @@ public class ZephyrBroker {
     public void start() throws Exception {
         if (started.compareAndSet(false, true)) {
             logger.info("ZephyrBroker[{}] starting...", brokerConfig.getBrokerName());
+
+            // Initialize scheduled executor service
+            this.scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+
+            // Initialize broker outer API
+            this.brokerOuterAPI = new BrokerOuterAPI(brokerConfig);
+            this.brokerOuterAPI.start();
 
             // Initialize message store
             this.messageStore = new DefaultMessageStore(brokerConfig);
@@ -61,6 +74,12 @@ public class ZephyrBroker {
             registerProcessors();
             this.remotingServer.start();
 
+            // Register broker to nameserver
+            this.registerBrokerAll();
+
+            // Start scheduled tasks
+            this.startScheduledTasks();
+
             logger.info("ZephyrBroker[{}] started successfully on port {}",
                     brokerConfig.getBrokerName(), brokerConfig.getListenPort());
         }
@@ -70,8 +89,20 @@ public class ZephyrBroker {
         if (shutdown.compareAndSet(false, true)) {
             logger.info("ZephyrBroker[{}] shutting down...", brokerConfig.getBrokerName());
 
+            // Unregister broker from nameserver
+            this.unregisterBrokerAll();
+
+            // Shutdown scheduled tasks
+            if (scheduledExecutorService != null) {
+                scheduledExecutorService.shutdown();
+            }
+
             if (remotingServer != null) {
                 remotingServer.shutdown();
+            }
+
+            if (brokerOuterAPI != null) {
+                brokerOuterAPI.shutdown();
             }
 
             if (consumerOffsetManager != null) {
@@ -160,5 +191,47 @@ public class ZephyrBroker {
 
     public NettyRemotingServer getRemotingServer() {
         return remotingServer;
+    }
+
+    private void registerBrokerAll() {
+        try {
+            if (brokerOuterAPI != null && brokerConfig.getNamesrvAddr() != null) {
+                brokerOuterAPI.registerBrokerAll(
+                    brokerConfig.getBrokerClusterName(),
+                    "127.0.0.1:" + brokerConfig.getListenPort(),
+                    brokerConfig.getBrokerName(),
+                    brokerConfig.getBrokerId(),
+                    null, // haServerAddr
+                    null  // topicConfigWrapper
+                );
+                logger.info("Register broker to name server success");
+            }
+        } catch (Exception e) {
+            logger.error("Register broker to name server failed", e);
+        }
+    }
+
+    private void unregisterBrokerAll() {
+        try {
+            if (brokerOuterAPI != null && brokerConfig.getNamesrvAddr() != null) {
+                brokerOuterAPI.unregisterBrokerAll(
+                    brokerConfig.getBrokerClusterName(),
+                    "127.0.0.1:" + brokerConfig.getListenPort(),
+                    brokerConfig.getBrokerName(),
+                    brokerConfig.getBrokerId()
+                );
+                logger.info("Unregister broker from name server success");
+            }
+        } catch (Exception e) {
+            logger.error("Unregister broker from name server failed", e);
+        }
+    }
+
+    private void startScheduledTasks() {
+        // Placeholder for scheduled tasks like:
+        // - Periodic broker registration
+        // - Statistics reporting
+        // - Cleanup tasks
+        logger.info("Scheduled tasks started");
     }
 }
