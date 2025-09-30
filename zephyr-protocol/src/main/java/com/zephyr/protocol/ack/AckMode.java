@@ -1,4 +1,4 @@
-package com.zephyr.broker.ack;
+package com.zephyr.protocol.ack;
 
 /**
  * Message acknowledgment mode

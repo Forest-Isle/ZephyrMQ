@@ -193,21 +193,19 @@ public class ZephyrBroker {
         return remotingServer;
     }
 
-    private void registerBrokerAll() {
-        try {
-            if (brokerOuterAPI != null && brokerConfig.getNamesrvAddr() != null) {
-                brokerOuterAPI.registerBrokerAll(
+    private void registerBrokerAll() throws Exception {
+        if (brokerOuterAPI != null && brokerConfig.getNamesrvAddr() != null) {
+            brokerOuterAPI.registerBrokerAll(
                     brokerConfig.getBrokerClusterName(),
                     "127.0.0.1:" + brokerConfig.getListenPort(),
                     brokerConfig.getBrokerName(),
                     brokerConfig.getBrokerId(),
                     null, // haServerAddr
                     null  // topicConfigWrapper
-                );
-                logger.info("Register broker to name server success");
-            }
-        } catch (Exception e) {
-            logger.error("Register broker to name server failed", e);
+            );
+            logger.info("Register broker to name server success");
+        } else {
+            throw new Exception("Cannot register broker: brokerOuterAPI or namesrvAddr is null");
         }
     }
 

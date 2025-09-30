@@ -5,114 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba118c5f-3bb6-45d1-ab39-cc8d029162c1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-admin/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-admin/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-admin/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-admin/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/zephyr-broker/src/main/java/com/zephyr/broker/ZephyrBroker.java" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/src/main/java/com/zephyr/broker/ZephyrBroker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/src/main/java/com/zephyr/broker/ack/AckManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/src/main/java/com/zephyr/broker/ack/AckManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/src/main/java/com/zephyr/broker/delay/DelayMessageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/src/main/java/com/zephyr/broker/delay/DelayMessageManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/src/main/java/com/zephyr/broker/dlq/DeadLetterQueueManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/src/main/java/com/zephyr/broker/dlq/DeadLetterQueueManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/src/main/java/com/zephyr/broker/processor/SendMessageProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/src/main/java/com/zephyr/broker/processor/SendMessageProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/src/main/java/com/zephyr/broker/store/DefaultMessageStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/src/main/java/com/zephyr/broker/store/DefaultMessageStore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/src/main/java/com/zephyr/broker/store/MessageStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/src/main/java/com/zephyr/broker/store/MessageStore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/src/main/java/com/zephyr/broker/transaction/TransactionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/src/main/java/com/zephyr/broker/transaction/TransactionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/src/test/java/com/zephyr/broker/ack/AckManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/src/test/java/com/zephyr/broker/ack/AckManagerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/src/test/java/com/zephyr/broker/transaction/TransactionManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/src/test/java/com/zephyr/broker/transaction/TransactionManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zephyr-broker/src/main/java/com/zephyr/broker/out/BrokerOuterAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/src/main/java/com/zephyr/broker/out/BrokerOuterAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/ZephyrBroker.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/ZephyrBroker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/ack/AckManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/ack/AckManager$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/ack/AckManager$PendingAck.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/ack/AckManager$PendingAck.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/ack/AckManager$RetryMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/ack/AckManager$RetryMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/ack/AckManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/ack/AckManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/delay/DelayMessageManager$DelayMessageTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/delay/DelayMessageManager$DelayMessageTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/delay/DelayMessageManager$DelayStatistics.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/delay/DelayMessageManager$DelayStatistics.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/delay/DelayMessageManager$DelayedMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/delay/DelayMessageManager$DelayedMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/delay/DelayMessageManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/delay/DelayMessageManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/dlq/DeadLetterQueueManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/dlq/DeadLetterQueueManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/order/OrderMessageManager$OrderedMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/order/OrderMessageManager$OrderedMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/processor/SendMessageProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/processor/SendMessageProcessor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/store/DefaultMessageStore.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/store/DefaultMessageStore.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/store/MessageStore.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/store/MessageStore.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/transaction/TransactionManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/transaction/TransactionManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/TEST-com.zephyr.broker.ack.AckManagerTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/TEST-com.zephyr.broker.ack.AckManagerTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/TEST-com.zephyr.broker.filter.FilterManagerTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/TEST-com.zephyr.broker.filter.FilterManagerTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/TEST-com.zephyr.broker.loadbalance.LoadBalanceManagerTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/TEST-com.zephyr.broker.loadbalance.LoadBalanceManagerTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/TEST-com.zephyr.broker.order.OrderMessageManagerTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/TEST-com.zephyr.broker.order.OrderMessageManagerTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/TEST-com.zephyr.broker.partition.PartitionStrategyTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/TEST-com.zephyr.broker.partition.PartitionStrategyTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/TEST-com.zephyr.broker.topic.TopicServiceTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/TEST-com.zephyr.broker.topic.TopicServiceTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/TEST-com.zephyr.broker.transaction.TransactionManagerTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/TEST-com.zephyr.broker.transaction.TransactionManagerTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/com.zephyr.broker.filter.FilterManagerTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/com.zephyr.broker.filter.FilterManagerTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/com.zephyr.broker.loadbalance.LoadBalanceManagerTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/com.zephyr.broker.loadbalance.LoadBalanceManagerTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/com.zephyr.broker.order.OrderMessageManagerTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/com.zephyr.broker.order.OrderMessageManagerTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/com.zephyr.broker.partition.PartitionStrategyTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/com.zephyr.broker.partition.PartitionStrategyTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/com.zephyr.broker.topic.TopicServiceTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/com.zephyr.broker.topic.TopicServiceTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/com.zephyr.broker.transaction.TransactionManagerTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/surefire-reports/com.zephyr.broker.transaction.TransactionManagerTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/test-classes/com/zephyr/broker/ack/AckManagerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/test-classes/com/zephyr/broker/ack/AckManagerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/test-classes/com/zephyr/broker/transaction/TransactionManagerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/test-classes/com/zephyr/broker/transaction/TransactionManagerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-client/src/main/java/com/zephyr/client/consumer/DefaultZephyrPushConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-client/src/main/java/com/zephyr/client/consumer/DefaultZephyrPushConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-client/src/main/java/com/zephyr/client/producer/DefaultZephyrProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-client/src/main/java/com/zephyr/client/producer/DefaultZephyrProducer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-client/src/main/java/com/zephyr/client/route/TopicRouteInfoManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-client/src/main/java/com/zephyr/client/route/TopicRouteInfoManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-client/target/classes/com/zephyr/client/consumer/DefaultZephyrPushConsumer.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-client/target/classes/com/zephyr/client/consumer/DefaultZephyrPushConsumer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-client/target/classes/com/zephyr/client/producer/DefaultZephyrProducer.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-client/target/classes/com/zephyr/client/producer/DefaultZephyrProducer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-client/target/classes/com/zephyr/client/route/TopicRouteInfoManager$TopicRouteData.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-client/target/classes/com/zephyr/client/route/TopicRouteInfoManager$TopicRouteData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-client/target/classes/com/zephyr/client/route/TopicRouteInfoManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-client/target/classes/com/zephyr/client/route/TopicRouteInfoManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-client/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-client/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-client/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-client/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-client/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-client/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-common/src/main/java/com/zephyr/common/config/BrokerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-common/src/main/java/com/zephyr/common/config/BrokerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-common/target/classes/com/zephyr/common/config/BrokerConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-common/target/classes/com/zephyr/common/config/BrokerConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-common/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-common/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-common/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-examples/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-examples/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-examples/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-examples/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-nameserver/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-nameserver/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-nameserver/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-nameserver/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-nameserver/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-nameserver/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-protocol/src/main/java/com/zephyr/protocol/message/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-protocol/src/main/java/com/zephyr/protocol/message/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-protocol/src/main/java/com/zephyr/protocol/network/RemotingCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-protocol/src/main/java/com/zephyr/protocol/network/RemotingCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-protocol/src/main/java/com/zephyr/protocol/transaction/TransactionMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-protocol/src/main/java/com/zephyr/protocol/transaction/TransactionMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-protocol/target/classes/com/zephyr/protocol/ack/MessageAck.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-protocol/target/classes/com/zephyr/protocol/ack/MessageAck.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-protocol/target/classes/com/zephyr/protocol/message/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-protocol/target/classes/com/zephyr/protocol/message/Message.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-protocol/target/classes/com/zephyr/protocol/message/SendResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-protocol/target/classes/com/zephyr/protocol/message/SendResult.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-protocol/target/classes/com/zephyr/protocol/network/ProtocolUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-protocol/target/classes/com/zephyr/protocol/network/ProtocolUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-protocol/target/classes/com/zephyr/protocol/network/RemotingCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-protocol/target/classes/com/zephyr/protocol/network/RemotingCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-protocol/target/classes/com/zephyr/protocol/transaction/TransactionMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-protocol/target/classes/com/zephyr/protocol/transaction/TransactionMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-protocol/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-protocol/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-protocol/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-protocol/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-protocol/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-protocol/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-protocol/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-protocol/target/zephyr-protocol-1.0.0-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/src/main/java/com/zephyr/storage/commitlog/CommitLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/src/main/java/com/zephyr/storage/commitlog/CommitLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/classes/com/zephyr/storage/checksum/MessageChecksum.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/classes/com/zephyr/storage/checksum/MessageChecksum.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/classes/com/zephyr/storage/commitlog/CommitLog$PutMessageResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/classes/com/zephyr/storage/commitlog/CommitLog$PutMessageResult.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/classes/com/zephyr/storage/commitlog/CommitLog$PutMessageStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/classes/com/zephyr/storage/commitlog/CommitLog$PutMessageStatus.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/classes/com/zephyr/storage/commitlog/CommitLog.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/classes/com/zephyr/storage/commitlog/CommitLog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/classes/com/zephyr/storage/flush/AsyncFlushService.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/classes/com/zephyr/storage/flush/AsyncFlushService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/TEST-com.zephyr.storage.checksum.MessageChecksumTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/TEST-com.zephyr.storage.checksum.MessageChecksumTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/TEST-com.zephyr.storage.commitlog.FileRollingServiceTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/TEST-com.zephyr.storage.commitlog.FileRollingServiceTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/TEST-com.zephyr.storage.compression.MessageCompressorTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/TEST-com.zephyr.storage.compression.MessageCompressorTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/TEST-com.zephyr.storage.flush.AsyncFlushServiceTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/TEST-com.zephyr.storage.flush.AsyncFlushServiceTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/TEST-com.zephyr.storage.index.SparseIndexTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/TEST-com.zephyr.storage.index.SparseIndexTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/TEST-com.zephyr.storage.integrity.MessageIntegrityCheckerTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/TEST-com.zephyr.storage.integrity.MessageIntegrityCheckerTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/com.zephyr.storage.checksum.MessageChecksumTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/com.zephyr.storage.checksum.MessageChecksumTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/com.zephyr.storage.commitlog.FileRollingServiceTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/com.zephyr.storage.commitlog.FileRollingServiceTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/com.zephyr.storage.compression.MessageCompressorTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/com.zephyr.storage.compression.MessageCompressorTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/com.zephyr.storage.flush.AsyncFlushServiceTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/com.zephyr.storage.flush.AsyncFlushServiceTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/com.zephyr.storage.index.SparseIndexTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/com.zephyr.storage.index.SparseIndexTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/com.zephyr.storage.integrity.MessageIntegrityCheckerTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-storage/target/surefire-reports/com.zephyr.storage.integrity.MessageIntegrityCheckerTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/out/BrokerOuterAPI.class" beforeDir="false" afterPath="$PROJECT_DIR$/zephyr-broker/target/classes/com/zephyr/broker/out/BrokerOuterAPI.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,6 +17,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
@@ -135,7 +37,7 @@
   "keyToString": {
     "Application.ConsumerExample.executor": "Run",
     "Application.ProducerExample.executor": "Run",
-    "Application.ZephyrBroker.executor": "Run",
+    "Application.ZephyrBroker.executor": "Debug",
     "Application.ZephyrNameServer.executor": "Run",
     "Maven.zephyr-broker [compile].executor": "Run",
     "Maven.zephyr-common [install].executor": "Run",
@@ -154,7 +56,7 @@
     "RunOnceActivity.go.migrated.go.modules.settings": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "SHELLCHECK.PATH": "/home/wuqisen/.local/share/JetBrains/IntelliJIdea2025.2/Shell Script/shellcheck",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "dev-1",
     "go.import.settings.migrated": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/wuqisen/Desktop/learning/ZephyrMQ",
@@ -170,7 +72,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.ProducerExample">
+  <component name="RunManager">
     <configuration name="ConsumerExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.zephyr.examples.ConsumerExample" />
       <module name="zephyr-examples" />
@@ -261,7 +163,9 @@
       <workItem from="1758675246073" duration="35000" />
       <workItem from="1758675296412" duration="7971000" />
       <workItem from="1758809178573" duration="3614000" />
-      <workItem from="1758854033995" duration="19765000" />
+      <workItem from="1758854033995" duration="22543000" />
+      <workItem from="1759059085286" duration="4660000" />
+      <workItem from="1759218009400" duration="1034000" />
     </task>
     <servers />
   </component>
@@ -273,5 +177,16 @@
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/zephyr-broker/src/main/java/com/zephyr/broker/ZephyrBroker.java</url>
+          <line>202</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

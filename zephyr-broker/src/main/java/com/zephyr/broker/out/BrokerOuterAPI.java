@@ -79,7 +79,7 @@ public class BrokerOuterAPI {
             }
 
         } catch (Exception e) {
-            logger.error("Register broker exception: brokerName={}", brokerName, e);
+            throw new RuntimeException("Register broker exception: brokerName=" + brokerName, e);
         }
 
         return registerBrokerResult;
